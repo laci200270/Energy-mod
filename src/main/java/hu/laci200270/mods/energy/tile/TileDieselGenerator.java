@@ -2,16 +2,18 @@ package hu.laci200270.mods.energy.tile;
 
 import hu.laci200270.mods.energy.fluid.FluidReference;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 
-public class TileDieselGenerator extends TileEntity implements IFluidTank {
+public class TileDieselGenerator extends TileEntity implements IFluidTank,IUpdatePlayerListBox {
 	public int fuelAmount;
 	public int maxFuelAmount;
 	public int energyAmount;
 	public int maxEnergy;
+	public boolean isRunning=false;
 	
 	
 	@Override
@@ -54,5 +56,16 @@ public class TileDieselGenerator extends TileEntity implements IFluidTank {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public TileDieselGenerator() {
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public void update() {
+		
+		
+	}
+	
+	
+	
 	
 }

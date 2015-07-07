@@ -18,7 +18,7 @@ public class ClientProxy extends CommonProxy {
 	public void init() {
 		EnergyMod.logger.debug("ClientPorxy Init!");
 		BlockReference.dieselGenerator.setCreativeTab(ClientReference.energy);
-		ClientRegistry.bindTileEntitySpecialRenderer(TileDieselGenerator.class, new DieselGeneratorSpecialRenderer());
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileDieselGenerator.class, new DieselGeneratorSpecialRenderer());
 		
 	}
 	

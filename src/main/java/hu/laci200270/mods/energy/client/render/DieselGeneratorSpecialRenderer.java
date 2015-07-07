@@ -20,12 +20,13 @@ public class DieselGeneratorSpecialRenderer extends TileEntitySpecialRenderer{
 		//	Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("energymod:models/textures/texture"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(x+1F, y+0.75F, z);
-			GL11.glScalef(3F, 3F, 3F);
+			GL11.glScalef(1F, 1F, 1F);
 			GL11.glPushMatrix();
 			GL11.glRotatef(180F, 0F,0F, 1.0F);
-			ClientLib.renderB3DModel(Minecraft.getMinecraft().getTextureManager(), new ResourceLocation("energymod","engine"), 20);
+			GL11.glPushMatrix();
+			//ClientLib.renderB3DModel(Minecraft.getMinecraft().getTextureManager(), new ResourceLocation("energymod","engine"), 20);
 		//	net.minecraftforge.client.model.b3d.B3DLoader.instance.loadModel(new ResourceLocation("energymod:assets/models/enginbe.b3d")).bake(null, null, null).
-			//new ModelDieselGenerator((TileDieselGenerator) tileEntity).render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+			new ModelDieselGenerator((TileDieselGenerator) tileEntity).render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 			GL11.glPopMatrix();
 			GL11.glPopMatrix();
 		
