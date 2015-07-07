@@ -27,7 +27,7 @@ public class ClientProxy extends CommonProxy {
 		
 		B3DLoader.instance.addDomain(EnergyMod.modid.toLowerCase());
 		 	Item item = Item.getItemFromBlock(BlockReference.dieselGenerator);
-	        ModelBakery.addVariantName(item, EnergyMod.modid + ":engine.b3d");
+		 	ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(EnergyMod.modid.toLowerCase() + ":engine.b3d", "inventory"));
 
 	        
 	}
