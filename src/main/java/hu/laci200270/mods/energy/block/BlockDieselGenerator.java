@@ -54,8 +54,9 @@ public class BlockDieselGenerator extends Block{
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn,
     		BlockPos pos) {
     	// TODO Auto-generated method stub
-   TileDieselGenerator generator=(TileDieselGenerator) worldIn.getTileEntity(pos);
-    	 return state.withProperty(isRunning, generator.isRunning);
+ //  TileDieselGenerator generator=(TileDieselGenerator) worldIn.getTileEntity(pos);
+    	 //return state.withProperty(isRunning, generator.isRunning);
+    	 return state;
     }
    /*  @Override
     protected BlockState createBlockState() {

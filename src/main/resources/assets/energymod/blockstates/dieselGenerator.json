@@ -5,11 +5,7 @@
         "model": "energymod:engine.b3d"
      },
     "variants": {
-        "normal": [{
-            "transform": {
-                "rotation": {"y": 45}
-            }
-        }],
+       
         "inventory": [{
            
             "transform": "forge:default-block"
