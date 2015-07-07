@@ -62,5 +62,10 @@ public class BlockDieselGenerator extends Block{
 
     	return new BlockState(this, new IProperty[]{isRunning});
     }
+     @Override
+    public int getMetaFromState(IBlockState state) {
+    	// TODO Auto-generated method stub
+    	return 0;
+    }
      
 }

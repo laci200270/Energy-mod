@@ -1,5 +1,8 @@
 {
+	"forge_marker": 1,
     "variants": {
-        "normal" : { "model" : "energymod:engine.b3d" }
+        "isrunning=true" : { "model" : "energymod:engine.b3d"},
+        "isrunning=false" : { "model" : "energymod:engine.b3d"}
+         
     }
 }
