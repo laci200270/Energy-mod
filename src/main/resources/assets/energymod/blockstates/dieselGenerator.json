@@ -1,6 +1,6 @@
 {
 	"forge_marker": 1,
-    "variants": {
+    "defaults": {
         "isrunning=true" : { "model" : "energymod:engine.b3d"},
         "isrunning=false" : { "model" : "energymod:engine.b3d"}
          
