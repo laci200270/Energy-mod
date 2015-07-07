@@ -57,11 +57,11 @@ public class BlockDieselGenerator extends Block{
    TileDieselGenerator generator=(TileDieselGenerator) worldIn.getTileEntity(pos);
     	 return state.withProperty(isRunning, generator.isRunning);
     }
-     @Override
+   /*  @Override
     protected BlockState createBlockState() {
 
     	return new BlockState(this, new IProperty[]{isRunning});
-    }
+    }*/
      @Override
     public int getMetaFromState(IBlockState state) {
     	// TODO Auto-generated method stub
