@@ -1,13 +1,17 @@
 {
-	"forge_marker": 1,
-	"defaults": {
-		"textures": {},
-		"model": "energymod:engine.b3d"
-	},
-	"variants": {
-		"normal": [{}],
-		"inventory": [{
-			"transform": "forge:default-block"
-		}]
-	}
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {},
+        "model": "energymod:engine.b3d"
+     },
+    "variants": {
+        "normal": {
+            "dummy": ""
+            
+        },
+        "inventory": {
+            "dummy": ""
+            
+        }
+    }
 }

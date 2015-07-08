@@ -24,7 +24,7 @@ public class EnergyMod {
 	
 	@SidedProxy(clientSide="hu.laci200270.mods.energy.proxy.ClientProxy",serverSide="hu.laci200270.mods.energy.proxy.CommonProxy")
 	public static CommonProxy proxy;
-	@Instance
+	@Instance(value=EnergyMod.modid)
 	public static EnergyMod modInstance;
 	
 	public static final String modid="energymod";
