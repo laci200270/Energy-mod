@@ -8,9 +8,10 @@ public class FluidDiesel extends Fluid {
 		super(fluidName);
 		// TODO Auto-generated constructor stub
 	}
-    @Override
-    public int getColor() {
-    	// TODO Auto-generated method stub
-    	return 1200;
-    }
+
+	@Override
+	public int getColor() {
+		// TODO Auto-generated method stub
+		return 1200;
+	}
 }

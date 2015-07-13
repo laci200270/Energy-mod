@@ -18,54 +18,69 @@ import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
-public class BlockDieselGenerator extends Block{
-	private static final PropertyBool isRunning= PropertyBool.create("isRunning");
-	public static final String name="dieselGenerator";
-	
-   
-    private int counter = 1;
-    private ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[0], new IUnlistedProperty[]{ B3DLoader.B3DFrameProperty.instance });
+public class BlockDieselGenerator extends Block {
+	private static final PropertyBool isRunning = PropertyBool
+			.create("isRunning");
+	public static final String name = "dieselGenerator";
+
+	private int counter = 1;
+	private ExtendedBlockState state = new ExtendedBlockState(this,
+			new IProperty[0],
+			new IUnlistedProperty[] { B3DLoader.B3DFrameProperty.instance });
+
 	public BlockDieselGenerator() {
 		super(Material.iron);
-		
+
 	}
+
 	@Override
 	public boolean hasTileEntity(IBlockState state) {
 		return true;
 	}
+
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileDieselGenerator();
 	}
-	   @Override
-       public boolean isOpaqueCube() { return false; }
 
-       @Override
-       public boolean isFullCube() { return false; }
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
 
-       @Override
-       public boolean isVisuallyOpaque() { return false; }
+	@Override
+	public boolean isFullCube() {
+		return false;
+	}
 
-       @Override
-       public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
-       {
-    	  
-           B3DLoader.B3DState newState = new B3DLoader.B3DState(null, counter);
-           return ((IExtendedBlockState)this.state.getBaseState()).withProperty(B3DLoader.B3DFrameProperty.instance, newState);
-       }
-       
-       @Override
-       public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ)
-       {
-           if(world.isRemote)
-           {
-               System.out.println("click " + counter);
-               if(player.isSneaking()) counter--;
-               else counter++;
-               //if(counter >= model.getNode().getKeys().size()) counter = 0;
-               world.markBlockRangeForRenderUpdate(pos, pos);
-           }
-           return false;
-       }
-   
+	@Override
+	public boolean isVisuallyOpaque() {
+		return false;
+	}
+
+	@Override
+	public IBlockState getExtendedState(IBlockState state, IBlockAccess world,
+			BlockPos pos) {
+
+		B3DLoader.B3DState newState = new B3DLoader.B3DState(null, counter);
+		return ((IExtendedBlockState) this.state.getBaseState()).withProperty(
+				B3DLoader.B3DFrameProperty.instance, newState);
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos,
+			IBlockState state, EntityPlayer player, EnumFacing side,
+			float hitX, float hitY, float hitZ) {
+		if (world.isRemote) {
+			System.out.println("click " + counter);
+			if (player.isSneaking())
+				counter--;
+			else
+				counter++;
+			// if(counter >= model.getNode().getKeys().size()) counter = 0;
+			world.markBlockRangeForRenderUpdate(pos, pos);
+		}
+		return false;
+	}
+
 }

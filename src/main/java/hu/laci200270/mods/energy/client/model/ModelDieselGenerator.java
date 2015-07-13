@@ -27,63 +27,62 @@ import org.lwjgl.opengl.GL11;
 
 import com.google.common.base.Function;
 
-public class ModelDieselGenerator extends ModelBase
-{
-	
-	private static final ModelResourceLocation engineModelFile = new ModelResourceLocation("energymod:models/block/engine.b3d");
-	Function < ResourceLocation, TextureAtlasSprite > textureGetter = new Function < ResourceLocation, TextureAtlasSprite > () {
+public class ModelDieselGenerator extends ModelBase {
+
+	private static final ModelResourceLocation engineModelFile = new ModelResourceLocation(
+			"energymod:models/block/engine.b3d");
+	Function<ResourceLocation, TextureAtlasSprite> textureGetter = new Function<ResourceLocation, TextureAtlasSprite>() {
 		public TextureAtlasSprite apply(ResourceLocation location) {
-			return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
+			return Minecraft.getMinecraft().getTextureMapBlocks()
+					.getAtlasSprite(location.toString());
 		}
 	};
-  public ModelDieselGenerator(TileDieselGenerator generator)
-  {
- 
-    
 
-  }
-  
-  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-  {
-   
-    Tessellator tessellator = Tessellator.getInstance();
-	WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-	IModel engineModel=null;
-    engineModel = B3DLoader.instance.loadModel(engineModelFile);
-	@SuppressWarnings("deprecation")
-	IBakedModel bakedBullet = engineModel.bake((TRSRTransformation.identity()), Attributes.DEFAULT_BAKED_FORMAT, textureGetter);
-	worldrenderer.startDrawingQuads();
-	//Get Quads
-	List < BakedQuad > generalQuads = bakedBullet.getGeneralQuads();
-	for (BakedQuad q: generalQuads) {
-		int[] vd = q.getVertexData();
-		worldrenderer.setVertexFormat(Attributes.DEFAULT_BAKED_FORMAT);
-		worldrenderer.addVertexData(vd);
+	public ModelDieselGenerator(TileDieselGenerator generator) {
+
 	}
-	for (EnumFacing face: EnumFacing.values()) {
-		List < BakedQuad > faceQuads = bakedBullet.getFaceQuads(face);
-		for (BakedQuad q: faceQuads) {
+
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
+
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		IModel engineModel = null;
+		engineModel = B3DLoader.instance.loadModel(engineModelFile);
+		@SuppressWarnings("deprecation")
+		IBakedModel bakedBullet = engineModel.bake(
+				(TRSRTransformation.identity()),
+				Attributes.DEFAULT_BAKED_FORMAT, textureGetter);
+		worldrenderer.startDrawingQuads();
+		// Get Quads
+		List<BakedQuad> generalQuads = bakedBullet.getGeneralQuads();
+		for (BakedQuad q : generalQuads) {
 			int[] vd = q.getVertexData();
 			worldrenderer.setVertexFormat(Attributes.DEFAULT_BAKED_FORMAT);
 			worldrenderer.addVertexData(vd);
 		}
-	}
-	tessellator.draw();
-	GL11.glPopMatrix();
+		for (EnumFacing face : EnumFacing.values()) {
+			List<BakedQuad> faceQuads = bakedBullet.getFaceQuads(face);
+			for (BakedQuad q : faceQuads) {
+				int[] vd = q.getVertexData();
+				worldrenderer.setVertexFormat(Attributes.DEFAULT_BAKED_FORMAT);
+				worldrenderer.addVertexData(vd);
+			}
+		}
+		tessellator.draw();
+		GL11.glPopMatrix();
 
-  }
-  
-  private void setRotation(ModelRenderer model, float x, float y, float z)
-  {
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
-  }
-  
-  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
-  {
-    super.setRotationAngles(f, f1, f2, f3, f4, f5,null );
-  }
+	}
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5) {
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, null);
+	}
 
 }
-

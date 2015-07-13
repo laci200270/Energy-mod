@@ -1,5 +1,6 @@
 package hu.laci200270.mods.energy.tile;
 
+import hu.laci200270.mods.energy.block.BlockReference;
 import hu.laci200270.mods.energy.dummyclasses.DummyBlockStore;
 
 import java.util.ArrayList;
@@ -120,6 +121,34 @@ public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlaye
 		
 		return returnable;
 		
+	}
+	public ArrayList<BlockPos> getNeighbourPipeBlocks(BlockPos pos,World world){
+		ArrayList<BlockPos> returnable=new ArrayList<BlockPos>();
+		
+		for (int i = 0; i < EnumFacing.VALUES.length; i++) {
+			BlockPos position=pos.offset(EnumFacing.VALUES[i]);
+			if(world.getBlockState(pos.offset(EnumFacing.VALUES[i])).getBlock()==BlockReference.fluidPipe){
+				returnable.add(pos.offset(EnumFacing.VALUES[i]));
+			}
+			
+		}
+		
+		return returnable;
+		
+	}
+	public ArrayList<BlockPos> getPipeBlocks(BlockPos pos){
+		ArrayList<BlockPos> returnable=new ArrayList<BlockPos>();
+		ArrayList<BlockPos> scannedPos=new ArrayList<BlockPos>();
+		
+		
+		
+		return returnable;
+		
+	}
+	public ArrayList<BlockPos> discoverPipes(ArrayList<BlockPos> alreadyScanned,BlockPos pos){
+		
+		
+		return alreadyScanned;
 	}
 	
 }

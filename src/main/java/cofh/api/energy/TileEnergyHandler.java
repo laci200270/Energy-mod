@@ -5,7 +5,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
 /**
- * Reference implementation of {@link IEnergyHandler}. Use/extend this or implement your own.
+ * Reference implementation of {@link IEnergyHandler}. Use/extend this or
+ * implement your own.
  *
  * @author King Lemming
  *

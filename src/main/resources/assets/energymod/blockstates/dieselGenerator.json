@@ -1,7 +1,9 @@
 {
     "forge_marker": 1,
     "defaults": {
-        "textures": {},
+        "textures": {
+        "#Material":"forgedebugmodelloaderregistry:texture"
+        },
         "model": "energymod:engine.b3d"
      },
     "variants": {
@@ -10,8 +12,8 @@
             
         },
         "inventory": {
-            "dummy": ""
-            
+            "dummy": "",
+            "model": "energymod:engine.b3d"
         }
     }
 }

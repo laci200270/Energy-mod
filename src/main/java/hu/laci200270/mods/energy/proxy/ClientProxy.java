@@ -31,21 +31,21 @@ public class ClientProxy extends CommonProxy {
 	public void init() {
 		EnergyMod.logger.debug("ClientPorxy Init!");
 		BlockReference.dieselGenerator.setCreativeTab(ClientReference.energy);
-		//ClientRegistry.bindTileEntitySpecialRenderer(TileDieselGenerator.class, new DieselGeneratorSpecialRenderer());
-		
+		// ClientRegistry.bindTileEntitySpecialRenderer(TileDieselGenerator.class,
+		// new DieselGeneratorSpecialRenderer());
+
 	}
-	
+
 	@Override
 	public void preInit() {
-		
-			B3DLoader.instance.addDomain(EnergyMod.modid.toLowerCase());
-		 	Item item = Item.getItemFromBlock(BlockReference.dieselGenerator);
-		 	ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(EnergyMod.modid.toLowerCase() + ":engine.b3d", "inventory"));
-		 	//B3DLoader.instance.accepts(modelLocation)
-	        
-	}
-	
-	
 
-	
+		B3DLoader.instance.addDomain(EnergyMod.modid.toLowerCase());
+		Item item = Item.getItemFromBlock(BlockReference.dieselGenerator);
+		ModelLoader.setCustomModelResourceLocation(item, 0,
+				new ModelResourceLocation(EnergyMod.modid.toLowerCase()
+						+ ":engine.b3d", "inventory"));
+		// B3DLoader.instance.accepts(modelLocation)
+
+	}
+
 }
