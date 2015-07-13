@@ -7,7 +7,7 @@ public class BlockFluidPipe extends Block {
 
 	protected BlockFluidPipe() {
 		super(Material.rock);
-		
+		setUnlocalizedName("fluidpipe");
 	}
 
 }

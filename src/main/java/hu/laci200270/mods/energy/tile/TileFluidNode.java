@@ -1,9 +1,9 @@
 package hu.laci200270.mods.energy.tile;
 
 import hu.laci200270.mods.energy.block.BlockReference;
-import hu.laci200270.mods.energy.dummyclasses.DummyBlockStore;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -18,6 +18,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 
 public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlayerListBox {
@@ -113,29 +114,40 @@ public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlaye
 		
 	}
 
-	public ArrayList<DummyBlockStore> getNeighbourBlocks(BlockPos pos,World world){
-		ArrayList<DummyBlockStore> returnable=new ArrayList<DummyBlockStore>();
-		
+	
+	public List<BlockPos> getNeighborPipeBlocks(BlockPos pos, World world) {
+		List<BlockPos> result = Lists.newArrayList();
 		for (int i = 0; i < EnumFacing.VALUES.length; i++) {
-			BlockPos position=pos.offset(EnumFacing.VALUES[i]);
-			returnable.add(new DummyBlockStore(position,world.getBlockState(position).getBlock()));
+			BlockPos p1 = pos.offset(EnumFacing.VALUES[i]);
+			if (world.getBlockState(p1).getBlock() == BlockReference.fluidPipe)
+					result.add(p1);
+		}
+		return result;
+	}
+	 
+	public Optional<BlockPos> findOutput(BlockPos pos, World world) {
+		// NOTE: If you ever add teserects, you'll need to track BlockPos-World pairs.
+		LinkedList<BlockPos> queue = Lists.newLinkedList();
+		List<BlockPos> checked = Lists.newArrayList();
+		queue.add(pos);
+		while (!queue.isEmpty()) {
+			BlockPos current = queue.pop();
+			@SuppressWarnings("unchecked") //safe because we only get the positions of fluid pipes
+			TileFluidNode currentPipe = (TileFluidNode) world.getTileEntity(current);
+			if (isOutput(pos, world))
+					return Optional.of(current);
+			checked.add(current);
+			for (BlockPos pos1: currentPipe.getNeighborPipeBlocks(pos, world)) {
+				if (!checked.contains(pos1))
+						queue.add(pos1);
+			}
 		}
 		
-		return returnable;
+		return Optional.absent();
 		
 	}
-	public List<BlockPos> getNeighborPipeBlocks(BlockPos pos, World world) {
-	    List<BlockPos> result = Lists.newArrayList();
-	    for (int i = 0; i < EnumFacing.VALUES.length; i++) {
-	        BlockPos p1 = pos.offset(EnumFacing.VALUES[i]);
-	        if (world.getBlockState(p1).getBlock() == BlockReference.fluidPipe)
-	            result.add(p1);
-	    }
-	    return result;
-	}
-	
-	@SuppressWarnings("deprecation")
-	public List<IFluidTank> getNearTanks(BlockPos pos,World world){
+	 
+	public boolean isOutput(BlockPos pos, World world) {
 		List<IFluidTank> result = Lists.newArrayList();
 		for (int i = 0; i < EnumFacing.VALUES.length; i++) {
 	        BlockPos p1 = pos.offset(EnumFacing.VALUES[i]);
@@ -148,27 +160,6 @@ public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlaye
 	        	}
 	        }}
 	    }
-		return result;
-	}
-	
-	public List<BlockPos> discoverPipes(List<BlockPos> scanned, BlockPos pos) {
-	    scanned.add(pos);
-	    for (BlockPos p : getNeighborPipeBlocks(pos, worldObj))
-	        if (!scanned.contains(p))
-	            discoverPipes(scanned, pos);
-	    return scanned;
-	}
-	
-	public List<IFluidTank> getTanksNearToThePipes(List<BlockPos> pipes,World world){
-		List<IFluidTank> result = Lists.newArrayList();
-		for (BlockPos pipe : pipes) {
-			List<IFluidTank> tanks=getNearTanks(pipe, world);
-			for (IFluidTank iFluidTank : tanks) {
-				if(!result.contains(iFluidTank)){
-					result.add(iFluidTank);
-				}
+		return !result.isEmpty();
 			}
-		}
-		return result;
-	}
 }

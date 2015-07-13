@@ -4,7 +4,7 @@
         "textures": {
         "#Material":"forgedebugmodelloaderregistry:texture"
         },
-        "model": "energymod:engine.b3d"
+        "model": "minecraft:beacon"
      },
     "variants": {
         "normal": {

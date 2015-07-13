@@ -4,6 +4,7 @@ import hu.laci200270.mods.energy.block.BlockReference;
 import hu.laci200270.mods.energy.fluid.FluidReference;
 import hu.laci200270.mods.energy.proxy.CommonProxy;
 import hu.laci200270.mods.energy.tile.TileDieselGenerator;
+import hu.laci200270.mods.energy.tile.TileFluidNode;
 
 import org.apache.logging.log4j.Logger;
 
@@ -34,6 +35,8 @@ public class EnergyMod {
 		logger.info("A lot of energy runs throught of Minecraft 1.8!");
 		GameRegistry.registerBlock(BlockReference.dieselGenerator,
 				"dieselGenerator");
+		GameRegistry.registerBlock(BlockReference.fluidNode, "fluidNode");
+		GameRegistry.registerBlock(BlockReference.fluidPipe, "fluidPipe");
 		proxy.preInit();
 		
 	}
@@ -43,6 +46,7 @@ public class EnergyMod {
 
 		GameRegistry
 				.registerTileEntity(TileDieselGenerator.class, "tileDiesel");
+		GameRegistry.registerTileEntity(TileFluidNode.class, "fluidNode");
 		FluidRegistry.registerFluid(FluidReference.fluidDiesel);
 		proxy.init();
 	}
