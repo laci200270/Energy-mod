@@ -136,18 +136,15 @@ public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlaye
 		return returnable;
 		
 	}
-	public ArrayList<BlockPos> getPipeBlocks(BlockPos pos){
-		ArrayList<BlockPos> returnable=new ArrayList<BlockPos>();
-		ArrayList<BlockPos> scannedPos=new ArrayList<BlockPos>();
-		
-		
-		
-		return returnable;
-		
-	}
+	
 	public ArrayList<BlockPos> discoverPipes(ArrayList<BlockPos> alreadyScanned,BlockPos pos){
-		
-		
+		alreadyScanned.add(pos);
+		ArrayList<BlockPos> neighbourpipes=getNeighbourPipeBlocks(pos, worldObj);
+		for (BlockPos blockPos : neighbourpipes) {
+			if(!alreadyScanned.contains(blockPos)){
+				discoverPipes(alreadyScanned, blockPos);
+			}
+		}
 		return alreadyScanned;
 	}
 	
