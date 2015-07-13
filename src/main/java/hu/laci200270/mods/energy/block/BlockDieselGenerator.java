@@ -2,6 +2,7 @@ package hu.laci200270.mods.energy.block;
 
 import hu.laci200270.mods.energy.tile.TileDieselGenerator;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -18,7 +19,7 @@ import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
-public class BlockDieselGenerator extends Block {
+public class BlockDieselGenerator extends BlockContainer {
 	private static final PropertyBool isRunning = PropertyBool
 			.create("isRunning");
 	public static final String name = "dieselGenerator";
@@ -42,7 +43,7 @@ public class BlockDieselGenerator extends Block {
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileDieselGenerator();
 	}
-
+/*
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
@@ -50,14 +51,14 @@ public class BlockDieselGenerator extends Block {
 
 	@Override
 	public boolean isFullCube() {
-		return false;
+		//return false;
 	}
 
 	@Override
 	public boolean isVisuallyOpaque() {
 		return false;
 	}
-
+*/
 	@Override
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess world,
 			BlockPos pos) {
@@ -81,6 +82,12 @@ public class BlockDieselGenerator extends Block {
 			world.markBlockRangeForRenderUpdate(pos, pos);
 		}
 		return false;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		// TODO Auto-generated method stub
+		return new TileDieselGenerator();
 	}
 
 }

@@ -1,5 +1,6 @@
 package hu.laci200270.mods.energy.tile;
 
+import hu.laci200270.mods.energy.EnergyMod;
 import hu.laci200270.mods.energy.block.BlockReference;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import net.minecraftforge.fluids.IFluidTank;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 
 public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlayerListBox {
 
@@ -117,10 +119,14 @@ public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlaye
 	
 	public List<BlockPos> getNeighborPipeBlocks(BlockPos pos, World world) {
 		List<BlockPos> result = Lists.newArrayList();
-		for (int i = 0; i < EnumFacing.VALUES.length; i++) {
-			BlockPos p1 = pos.offset(EnumFacing.VALUES[i]);
+		for (EnumFacing facing:EnumFacing.VALUES) {
+			BlockPos p1 = pos.offset(facing);
 			if (world.getBlockState(p1).getBlock() == BlockReference.fluidPipe)
-					result.add(p1);
+				EnergyMod.logger.info("Found pipe at:");
+				EnergyMod.logger.info("x:" +pos.getX());
+			EnergyMod.logger.info("y:" +pos.getY());
+			EnergyMod.logger.info("z:" +pos.getZ());
+				result.add(p1);
 		}
 		return result;
 	}
@@ -133,11 +139,18 @@ public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlaye
 		while (!queue.isEmpty()) {
 			BlockPos current = queue.pop();
 			@SuppressWarnings("unchecked") //safe because we only get the positions of fluid pipes
+			
+			
 			TileFluidNode currentPipe = (TileFluidNode) world.getTileEntity(current);
+			EnergyMod.logger.info("Scanning block at:");
+			EnergyMod.logger.info("x:" +pos.getX());
+			EnergyMod.logger.info("y:" +pos.getY());
+			EnergyMod.logger.info("z:" +pos.getZ());
+			EnergyMod.logger.info("Block type is:"+world.getBlockState(pos).getBlock().getLocalizedName());
 			if (isOutput(pos, world))
 					return Optional.of(current);
 			checked.add(current);
-			for (BlockPos pos1: currentPipe.getNeighborPipeBlocks(pos, world)) {
+			for (BlockPos pos1: getNeighborPipeBlocks(pos, world)) {
 				if (!checked.contains(pos1))
 						queue.add(pos1);
 			}
@@ -149,16 +162,27 @@ public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlaye
 	 
 	public boolean isOutput(BlockPos pos, World world) {
 		List<IFluidTank> result = Lists.newArrayList();
-		for (int i = 0; i < EnumFacing.VALUES.length; i++) {
-	        BlockPos p1 = pos.offset(EnumFacing.VALUES[i]);
+		for(EnumFacing facing : EnumFacing.VALUES){
+	        
+			BlockPos p1=pos.offset(facing);
+	       
 	        IBlockState blockState=world.getBlockState(p1);
 	        Block block=blockState.getBlock();
-	        if(block.hasTileEntity()||block.hasTileEntity(blockState)){
-	        	if(p1!=getPos()){
+	    	EnergyMod.logger.info("Scanning block at:");
+			EnergyMod.logger.info("x:" +p1.getX());
+			EnergyMod.logger.info("y:" +p1.getY());
+			EnergyMod.logger.info("z:" +p1.getZ());
+			EnergyMod.logger.info("Side: "+facing.getName());
+			EnergyMod.logger.info("Block type is:"+world.getBlockState(p1).getBlock().getLocalizedName());
+	        if(world.getTileEntity(p1)!=null){
+	        	EnergyMod.logger.info("Block has tile!");
 	        	if(world.getTileEntity(p1) instanceof IFluidTank){
+	        		EnergyMod.logger.info("Block has tanks!");
+	        		System.out.println("Block has tanks!");
+	        		
 	        		result.add((IFluidTank) world.getTileEntity(p1));
 	        	}
-	        }}
+	        }
 	    }
 		return !result.isEmpty();
 			}
