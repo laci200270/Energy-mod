@@ -121,12 +121,13 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 		List<BlockPos> result = Lists.newArrayList();
 		for (EnumFacing facing:EnumFacing.VALUES) {
 			BlockPos p1 = pos.offset(facing);
-			if (world.getBlockState(p1).getBlock() == BlockReference.fluidPipe)
+			if (BlockUtil.isPipe(world.getBlockState(p1).getBlock())) {
 				EnergyMod.logger.info("Found pipe at:");
 				EnergyMod.logger.info("x:" +pos.getX());
 			EnergyMod.logger.info("y:" +pos.getY());
 			EnergyMod.logger.info("z:" +pos.getZ());
 				result.add(p1);
+			}
 		}
 		return result;
 	}

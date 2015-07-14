@@ -8,4 +8,12 @@ public class BlockUtil {
 	public static BlockFluidPipe fluidPipe=new BlockFluidPipe();
 	public static BlockFluidNode fluidNode=new BlockFluidNode();
 
+	public static boolean isPipe(Block block) {
+		// TODO: Replace with proper registry service
+		if (   block == fluidPipe
+		    || block == fluidNode)
+			return true;
+		else
+			return false;
+	}
 }
