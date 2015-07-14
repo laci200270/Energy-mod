@@ -1,6 +1,6 @@
 package hu.laci200270.mods.energy;
 
-import hu.laci200270.mods.energy.block.BlockReference;
+import hu.laci200270.mods.energy.block.BlockUtil;
 import hu.laci200270.mods.energy.fluid.FluidReference;
 import hu.laci200270.mods.energy.proxy.CommonProxy;
 import hu.laci200270.mods.energy.tile.TileDieselGenerator;
@@ -33,10 +33,10 @@ public class EnergyMod {
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		logger.info("A lot of energy runs throught of Minecraft 1.8!");
-		GameRegistry.registerBlock(BlockReference.dieselGenerator,
+		GameRegistry.registerBlock(BlockUtil.dieselGenerator,
 				"dieselGenerator");
-		GameRegistry.registerBlock(BlockReference.fluidNode, "fluidNode");
-		GameRegistry.registerBlock(BlockReference.fluidPipe, "fluidPipe");
+		GameRegistry.registerBlock(BlockUtil.fluidNode, "fluidNode");
+		GameRegistry.registerBlock(BlockUtil.fluidPipe, "fluidPipe");
 		proxy.preInit();
 		
 	}

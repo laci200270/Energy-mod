@@ -1,7 +1,7 @@
 package hu.laci200270.mods.energy.tile;
 
 import hu.laci200270.mods.energy.EnergyMod;
-import hu.laci200270.mods.energy.block.BlockReference;
+import hu.laci200270.mods.energy.block.BlockUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

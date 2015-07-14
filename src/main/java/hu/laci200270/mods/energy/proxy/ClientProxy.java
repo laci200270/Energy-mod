@@ -5,7 +5,7 @@ import java.util.Collection;
 import com.google.common.base.Function;
 
 import hu.laci200270.mods.energy.EnergyMod;
-import hu.laci200270.mods.energy.block.BlockReference;
+import hu.laci200270.mods.energy.block.BlockUtil;
 import hu.laci200270.mods.energy.client.ClientReference;
 import hu.laci200270.mods.energy.client.render.DieselGeneratorSpecialRenderer;
 import hu.laci200270.mods.energy.tile.TileDieselGenerator;
@@ -30,7 +30,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init() {
 		EnergyMod.logger.debug("ClientPorxy Init!");
-		BlockReference.dieselGenerator.setCreativeTab(ClientReference.energy);
+		BlockUtil.dieselGenerator.setCreativeTab(ClientReference.energy);
 		// ClientRegistry.bindTileEntitySpecialRenderer(TileDieselGenerator.class,
 		// new DieselGeneratorSpecialRenderer());
 
@@ -40,7 +40,7 @@ public class ClientProxy extends CommonProxy {
 	public void preInit() {
 
 		B3DLoader.instance.addDomain(EnergyMod.modid.toLowerCase());
-		Item item = Item.getItemFromBlock(BlockReference.dieselGenerator);
+		Item item = Item.getItemFromBlock(BlockUtil.dieselGenerator);
 		ModelLoader.setCustomModelResourceLocation(item, 0,
 				new ModelResourceLocation(EnergyMod.modid.toLowerCase()
 						+ ":engine.b3d", "inventory"));
