@@ -151,21 +151,22 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 		return Optional.absent();
 		
 	}
-	 
-	public boolean canOutput(BlockPos pos, World world) {
-		List<IFluidTank> result = Lists.newArrayList();
-		for(EnumFacing facing : EnumFacing.VALUES){
-	        
-			BlockPos p1=pos.offset(facing);
-	       
-	        IBlockState blockState=world.getBlockState(p1);
-	        Block block=blockState.getBlock();
-	        if(world.getTileEntity(p1)!=null){
-	        	if(world.getTileEntity(p1) instanceof IFluidTank){
-	        		result.add((IFluidTank) world.getTileEntity(p1));
-	        	}
-	        }
-	    }
-		return !result.isEmpty();
+
+	public Optional<IFluidTank> getTankIfAdjacent(BlockPos pos, World world) {
+		for(EnumFacing facing : EnumFacing.VALUES) {
+			BlockPos onFace = pos.offset(facing);
+
+			TileEntity te = world.getTileEntity(onFace);
+			if (te != null && te instanceof IFluidTank) {
+				return Optional.of((IFluidTank) te);
 			}
+		}
+
+		return Optional.absent();
+	}
+
+	@Override
+	public boolean canOutput(BlockPos pos, World world) {
+		return getTankIfAdjacent(pos, world).isPresent();
+	}
 }
