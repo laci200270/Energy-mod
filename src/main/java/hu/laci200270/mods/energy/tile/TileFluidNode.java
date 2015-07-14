@@ -121,10 +121,6 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 		for (EnumFacing facing:EnumFacing.VALUES) {
 			BlockPos p1 = pos.offset(facing);
 			if (BlockUtil.isPipe(world.getBlockState(p1).getBlock())) {
-				EnergyMod.logger.info("Found pipe at:");
-				EnergyMod.logger.info("x:" +pos.getX());
-			EnergyMod.logger.info("y:" +pos.getY());
-			EnergyMod.logger.info("z:" +pos.getZ());
 				result.add(p1);
 			}
 		}
@@ -142,11 +138,6 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 			TileEntity te = world.getTileEntity(current);
 			if (current != pos && te instanceof FluidOutput) {
 				FluidOutput currentPipe = (FluidOutput) world.getTileEntity(current);
-				EnergyMod.logger.info("Scanning block at:");
-				EnergyMod.logger.info("x:" + pos.getX());
-				EnergyMod.logger.info("y:" + pos.getY());
-				EnergyMod.logger.info("z:" + pos.getZ());
-				EnergyMod.logger.info("Block type is:" + world.getBlockState(pos).getBlock().getLocalizedName());
 				if (canOutput(current, world))
 					return Optional.of(current);
 			}
@@ -169,18 +160,8 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 	       
 	        IBlockState blockState=world.getBlockState(p1);
 	        Block block=blockState.getBlock();
-	    	EnergyMod.logger.info("Scanning block at:");
-			EnergyMod.logger.info("x:" +p1.getX());
-			EnergyMod.logger.info("y:" +p1.getY());
-			EnergyMod.logger.info("z:" +p1.getZ());
-			EnergyMod.logger.info("Side: "+facing.getName());
-			EnergyMod.logger.info("Block type is:"+world.getBlockState(p1).getBlock().getLocalizedName());
 	        if(world.getTileEntity(p1)!=null){
-	        	EnergyMod.logger.info("Block has tile!");
 	        	if(world.getTileEntity(p1) instanceof IFluidTank){
-	        		EnergyMod.logger.info("Block has tanks!");
-	        		System.out.println("Block has tanks!");
-	        		
 	        		result.add((IFluidTank) world.getTileEntity(p1));
 	        	}
 	        }
