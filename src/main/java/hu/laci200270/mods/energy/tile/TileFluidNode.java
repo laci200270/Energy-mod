@@ -138,7 +138,6 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 		queue.add(pos);
 		while (!queue.isEmpty()) {
 			BlockPos current = queue.pop();
-			@SuppressWarnings("unchecked") //safe because we only get the positions of fluid pipes
 			
 			TileEntity te = world.getTileEntity(current);
 			if (current != pos && te instanceof FluidOutput) {
