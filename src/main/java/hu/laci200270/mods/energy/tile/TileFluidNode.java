@@ -23,7 +23,7 @@ import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 
-public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlayerListBox {
+public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlayerListBox, FluidOutput {
 
 	public int fluidAmount = 0;
 	public int maxFluidAmount = 0;
@@ -140,15 +140,17 @@ public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlaye
 			BlockPos current = queue.pop();
 			@SuppressWarnings("unchecked") //safe because we only get the positions of fluid pipes
 			
-			
-			TileFluidNode currentPipe = (TileFluidNode) world.getTileEntity(current);
-			EnergyMod.logger.info("Scanning block at:");
-			EnergyMod.logger.info("x:" +pos.getX());
-			EnergyMod.logger.info("y:" +pos.getY());
-			EnergyMod.logger.info("z:" +pos.getZ());
-			EnergyMod.logger.info("Block type is:"+world.getBlockState(pos).getBlock().getLocalizedName());
-			if (isOutput(pos, world))
+			TileEntity te = world.getTileEntity(current);
+			if (te instanceof FluidOutput) {
+				FluidOutput currentPipe = (FluidOutput) world.getTileEntity(current);
+				EnergyMod.logger.info("Scanning block at:");
+				EnergyMod.logger.info("x:" + pos.getX());
+				EnergyMod.logger.info("y:" + pos.getY());
+				EnergyMod.logger.info("z:" + pos.getZ());
+				EnergyMod.logger.info("Block type is:" + world.getBlockState(pos).getBlock().getLocalizedName());
+				if (canOutput(pos, world))
 					return Optional.of(current);
+			}
 			checked.add(current);
 			for (BlockPos pos1: getNeighborPipeBlocks(pos, world)) {
 				if (!checked.contains(pos1))
@@ -160,7 +162,7 @@ public class TileFluidNode extends TileEntity implements IFluidTank,IUpdatePlaye
 		
 	}
 	 
-	public boolean isOutput(BlockPos pos, World world) {
+	public boolean canOutput(BlockPos pos, World world) {
 		List<IFluidTank> result = Lists.newArrayList();
 		for(EnumFacing facing : EnumFacing.VALUES){
 	        
