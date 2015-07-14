@@ -21,7 +21,6 @@ import net.minecraftforge.fluids.IFluidTank;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import com.google.gson.Gson;
 
 public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlayerListBox, FluidOutput {
 
