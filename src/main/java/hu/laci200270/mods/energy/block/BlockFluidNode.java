@@ -33,7 +33,7 @@ public class BlockFluidNode extends BlockContainer {
 			float hitX, float hitY, float hitZ) {
 		if(!worldIn.isRemote){
 		TileFluidNode tile=(TileFluidNode) worldIn.getTileEntity(pos);
-		BlockPos target= tile.findOutput(pos, worldIn).or(new BlockPos(0, 0, 0));;
+		BlockPos target= tile.findOutput().or(new BlockPos(0, 0, 0));;
 		playerIn.addChatMessage(new ChatComponentText("Target position: "));
 		playerIn.addChatMessage(new ChatComponentText("x: "+target.getX()));
 		playerIn.addChatMessage(new ChatComponentText("y: "+target.getY()));

@@ -4,5 +4,5 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public interface FluidOutput {
-    boolean canOutput(BlockPos pos, World world);
+    boolean canOutput();
 }
