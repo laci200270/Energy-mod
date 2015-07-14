@@ -25,7 +25,7 @@ import com.google.common.base.Function;
 public class ClientLib {
 
 	public static void renderB3DModel(TextureManager textureManager,
-			ResourceLocation modelLoc, int animationCounter) {
+	                                  ResourceLocation modelLoc, int animationCounter) {
 		IModel model = ModelLoaderRegistry.getModel(modelLoc);
 		B3DLoader.B3DState defaultState = ((B3DLoader.Wrapper) model)
 				.getDefaultState();
@@ -35,7 +35,7 @@ public class ClientLib {
 	}
 
 	public static void renderBlockModel(TextureManager textureManager,
-			IModel model, IModelState state) {
+	                                    IModel model, IModelState state) {
 		if (state == null)
 			state = model.getDefaultState();
 

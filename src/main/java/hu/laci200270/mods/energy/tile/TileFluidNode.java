@@ -23,24 +23,21 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 
 	public int fluidAmount = 0;
 	public int maxFluidAmount = 0;
-	private FluidStack fluid=null;
+	private FluidStack fluid = null;
 
-	
-
-	
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-		
-		fluid=FluidStack.loadFluidStackFromNBT(compound.getCompoundTag("fluid"));
+
+		fluid = FluidStack.loadFluidStackFromNBT(compound.getCompoundTag("fluid"));
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound compound) {
-		if(fluid!=null){
+		if (fluid != null) {
 			fluid.writeToNBT(compound.getCompoundTag("fluid"));
 		}
-		
+
 	}
 
 	@Override
@@ -56,19 +53,19 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 
 	@Override
 	public int getCapacity() {
-		
+
 		return maxFluidAmount;
 	}
 
 	@Override
 	public FluidTankInfo getInfo() {
-	
+
 		return new FluidTankInfo(this);
 	}
 
 	@Override
 	public int fill(FluidStack resource, boolean doFill) {
-		
+
 		int amount = resource.amount;
 		int locFuelAmount = fluidAmount;
 		int filled = 0;
@@ -87,7 +84,7 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 
 	@Override
 	public FluidStack drain(int maxDrain, boolean doDrain) {
-		
+
 		int locFuelAmont = fluidAmount;
 		int afterDrained = 0;
 		int drained = 0;
@@ -106,16 +103,15 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 
 	@Override
 	public void update() {
-		ArrayList<BlockPos> scannedPos=new ArrayList<BlockPos>();
-		
-		
-		
+		ArrayList<BlockPos> scannedPos = new ArrayList<BlockPos>();
+
+
 	}
 
-	
+
 	private static List<BlockPos> getNeighborPipeBlocks(BlockPos pos, World worldObj) {
 		List<BlockPos> result = Lists.newArrayList();
-		for (EnumFacing facing:EnumFacing.VALUES) {
+		for (EnumFacing facing : EnumFacing.VALUES) {
 			BlockPos p1 = pos.offset(facing);
 			if (BlockUtil.isPipe(worldObj.getBlockState(p1).getBlock())) {
 				result.add(p1);
@@ -123,7 +119,7 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 		}
 		return result;
 	}
-	 
+
 	public Optional<BlockPos> findOutput() {
 		// NOTE: If you ever add teserects, you'll need to track BlockPos-World pairs.
 		LinkedList<BlockPos> queue = Lists.newLinkedList();
@@ -131,7 +127,7 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 		queue.add(pos);
 		while (!queue.isEmpty()) {
 			BlockPos current = queue.pop();
-			
+
 			TileEntity te = worldObj.getTileEntity(current);
 			if (current != pos && te instanceof FluidOutput) {
 				if (canOutput())
@@ -143,13 +139,13 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 					queue.add(p);
 			}
 		}
-		
+
 		return Optional.absent();
-		
+
 	}
 
 	private Optional<IFluidTank> getTankIfAdjacent() {
-		for(EnumFacing facing : EnumFacing.VALUES) {
+		for (EnumFacing facing : EnumFacing.VALUES) {
 			BlockPos onFace = pos.offset(facing);
 
 			TileEntity te = worldObj.getTileEntity(onFace);

@@ -15,7 +15,7 @@ public class DieselGeneratorSpecialRenderer extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y,
-			double z, float f, int integer) {
+	                               double z, float f, int integer) {
 		// Minecraft.getMinecraft().renderEngine.bindTexture(new
 		// ResourceLocation("energymod:models/textures/texture"));
 		GL11.glPushMatrix();

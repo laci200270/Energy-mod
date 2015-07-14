@@ -19,29 +19,32 @@ public class BlockFluidNode extends BlockContainer {
 	protected BlockFluidNode() {
 		super(Material.iron);
 		setUnlocalizedName("fluidnode");
-	
+
 	}
-	
+
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		// TODO Auto-generated method stub
 		return new TileFluidNode();
 	}
+
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos,
-			IBlockState state, EntityPlayer playerIn, EnumFacing side,
-			float hitX, float hitY, float hitZ) {
-		if(!worldIn.isRemote){
-		TileFluidNode tile=(TileFluidNode) worldIn.getTileEntity(pos);
-		BlockPos target= tile.findOutput().or(new BlockPos(0, 0, 0));;
-		playerIn.addChatMessage(new ChatComponentText("Target position: "));
-		playerIn.addChatMessage(new ChatComponentText("x: "+target.getX()));
-		playerIn.addChatMessage(new ChatComponentText("y: "+target.getY()));
-		playerIn.addChatMessage(new ChatComponentText("z: "+target.getZ()));
-		return true;
+	                                IBlockState state, EntityPlayer playerIn, EnumFacing side,
+	                                float hitX, float hitY, float hitZ) {
+		if (!worldIn.isRemote) {
+			TileFluidNode tile = (TileFluidNode) worldIn.getTileEntity(pos);
+			BlockPos target = tile.findOutput().or(new BlockPos(0, 0, 0));
+			;
+			playerIn.addChatMessage(new ChatComponentText("Target position: "));
+			playerIn.addChatMessage(new ChatComponentText("x: " + target.getX()));
+			playerIn.addChatMessage(new ChatComponentText("y: " + target.getY()));
+			playerIn.addChatMessage(new ChatComponentText("z: " + target.getZ()));
+			return true;
 		}
 		return false;
 	}
+
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		// TODO Auto-generated method stub

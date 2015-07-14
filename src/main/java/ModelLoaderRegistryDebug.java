@@ -73,7 +73,7 @@ public class ModelLoaderRegistryDebug {
 		private int counter = 1;
 		private ExtendedBlockState state = new ExtendedBlockState(this,
 				new IProperty[0],
-				new IUnlistedProperty[] { B3DLoader.B3DFrameProperty.instance });
+				new IUnlistedProperty[]{B3DLoader.B3DFrameProperty.instance});
 
 		private CustomModelBlock() {
 			super(Material.iron);
@@ -98,7 +98,7 @@ public class ModelLoaderRegistryDebug {
 
 		@Override
 		public IBlockState getExtendedState(IBlockState state,
-				IBlockAccess world, BlockPos pos) {
+		                                    IBlockAccess world, BlockPos pos) {
 			B3DLoader.B3DState newState = new B3DLoader.B3DState(null, counter);
 			return ((IExtendedBlockState) this.state.getBaseState())
 					.withProperty(B3DLoader.B3DFrameProperty.instance, newState);
@@ -106,8 +106,8 @@ public class ModelLoaderRegistryDebug {
 
 		@Override
 		public boolean onBlockActivated(World world, BlockPos pos,
-				IBlockState state, EntityPlayer player, EnumFacing side,
-				float hitX, float hitY, float hitZ) {
+		                                IBlockState state, EntityPlayer player, EnumFacing side,
+		                                float hitX, float hitY, float hitZ) {
 			if (world.isRemote) {
 				System.out.println("click " + counter);
 				if (player.isSneaking())

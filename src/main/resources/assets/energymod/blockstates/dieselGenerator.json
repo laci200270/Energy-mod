@@ -1,19 +1,18 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "textures": {
-        "#Material":"forgedebugmodelloaderregistry:texture"
-        },
-        "model": "minecraft:beacon"
-     },
-    "variants": {
-        "normal": {
-            "dummy": ""
-            
-        },
-        "inventory": {
-            "dummy": "",
-            "model": "energymod:engine.b3d"
-        }
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "#Material": "forgedebugmodelloaderregistry:texture"
+    },
+    "model": "minecraft:beacon"
+  },
+  "variants": {
+    "normal": {
+      "dummy": ""
+    },
+    "inventory": {
+      "dummy": "",
+      "model": "energymod:engine.b3d"
     }
+  }
 }

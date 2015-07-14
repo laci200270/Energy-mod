@@ -27,7 +27,7 @@ public class BlockDieselGenerator extends BlockContainer {
 	private int counter = 1;
 	private ExtendedBlockState state = new ExtendedBlockState(this,
 			new IProperty[0],
-			new IUnlistedProperty[] { B3DLoader.B3DFrameProperty.instance });
+			new IUnlistedProperty[]{B3DLoader.B3DFrameProperty.instance});
 
 	public BlockDieselGenerator() {
 		super(Material.iron);
@@ -43,25 +43,26 @@ public class BlockDieselGenerator extends BlockContainer {
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileDieselGenerator();
 	}
-/*
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
 
-	@Override
-	public boolean isFullCube() {
-		//return false;
-	}
+	/*
+		@Override
+		public boolean isOpaqueCube() {
+			return false;
+		}
 
-	@Override
-	public boolean isVisuallyOpaque() {
-		return false;
-	}
-*/
+		@Override
+		public boolean isFullCube() {
+			//return false;
+		}
+
+		@Override
+		public boolean isVisuallyOpaque() {
+			return false;
+		}
+	*/
 	@Override
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess world,
-			BlockPos pos) {
+	                                    BlockPos pos) {
 
 		B3DLoader.B3DState newState = new B3DLoader.B3DState(null, counter);
 		return ((IExtendedBlockState) this.state.getBaseState()).withProperty(
@@ -70,8 +71,8 @@ public class BlockDieselGenerator extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos,
-			IBlockState state, EntityPlayer player, EnumFacing side,
-			float hitX, float hitY, float hitZ) {
+	                                IBlockState state, EntityPlayer player, EnumFacing side,
+	                                float hitX, float hitY, float hitZ) {
 		if (world.isRemote) {
 			System.out.println("click " + counter);
 			if (player.isSneaking())

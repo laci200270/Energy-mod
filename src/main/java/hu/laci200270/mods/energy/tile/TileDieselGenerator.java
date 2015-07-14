@@ -44,19 +44,19 @@ public class TileDieselGenerator extends TileEntity implements IFluidTank,
 
 	@Override
 	public int getCapacity() {
-		
+
 		return maxFuelAmount;
 	}
 
 	@Override
 	public FluidTankInfo getInfo() {
-		
+
 		return new FluidTankInfo(this);
 	}
 
 	@Override
 	public int fill(FluidStack resource, boolean doFill) {
-		
+
 		int amount = resource.amount;
 		int locFuelAmount = fuelAmount;
 		int filled = 0;

@@ -6,14 +6,13 @@ import net.minecraft.util.BlockPos;
 public class DummyBlockStore {
 	public BlockPos position;
 	public Block block;
-	
-	
+
+
 	public DummyBlockStore(BlockPos position, Block block) {
-		
+
 		this.position = position;
 		this.block = block;
 	}
-	
-	
-	
+
+
 }

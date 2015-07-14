@@ -1,27 +1,33 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "textures": {
-            "#texture": "forgedebugmodelloaderregistry:texture",
-            "#chest": "entity/chest/normal"
-        },
-        "model": "forgedebugmodelloaderregistry:chest.b3d"
-     },
-    "variants": {
-        "normal": [{
-            "transform": {
-                "rotation": {"y": 45}
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "#texture": "forgedebugmodelloaderregistry:texture",
+      "#chest": "entity/chest/normal"
+    },
+    "model": "forgedebugmodelloaderregistry:chest.b3d"
+  },
+  "variants": {
+    "normal": [
+      {
+        "transform": {
+          "rotation": {
+            "y": 45
+          }
+        }
+      }
+    ],
+    "inventory": [
+      {
+        /*"transform": {
+            "thirdperson": {
+                "translation": [ 0, 0.09375, -0.171875 ],
+                "rotation": [ {"y": -45}, {"x": 10}, {"z": 170} ],
+                "scale": 0.375
             }
-        }],
-        "inventory": [{
-            /*"transform": {
-                "thirdperson": {
-                    "translation": [ 0, 0.09375, -0.171875 ],
-                    "rotation": [ {"y": -45}, {"x": 10}, {"z": 170} ],
-                    "scale": 0.375
-                }
-            }*/
-            "transform": "forge:default-block"
-        }]
-    }
+        }*/
+        "transform": "forge:default-block"
+      }
+    ]
+  }
 }

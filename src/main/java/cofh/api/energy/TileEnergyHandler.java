@@ -9,7 +9,6 @@ import net.minecraft.util.EnumFacing;
  * implement your own.
  *
  * @author King Lemming
- *
  */
 public class TileEnergyHandler extends TileEntity implements IEnergyHandler {
 

@@ -37,7 +37,7 @@ public class EnergyMod {
 		GameRegistry.registerBlock(BlockUtil.fluidNode, "fluidNode");
 		GameRegistry.registerBlock(BlockUtil.fluidPipe, "fluidPipe");
 		proxy.preInit();
-		
+
 	}
 
 	@EventHandler

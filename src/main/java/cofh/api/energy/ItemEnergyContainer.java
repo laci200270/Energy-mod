@@ -7,9 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 /**
  * Reference implementation of {@link IEnergyContainerItem}. Use/extend this or
  * implement your own.
- * 
+ *
  * @author King Lemming
- * 
  */
 public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 
@@ -63,7 +62,7 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 	/* IEnergyContainerItem */
 	@Override
 	public int receiveEnergy(ItemStack container, int maxReceive,
-			boolean simulate) {
+	                         boolean simulate) {
 
 		if (container.getTagCompound() == null) {
 			container.setTagCompound(new NBTTagCompound());
@@ -81,7 +80,7 @@ public class ItemEnergyContainer extends Item implements IEnergyContainerItem {
 
 	@Override
 	public int extractEnergy(ItemStack container, int maxExtract,
-			boolean simulate) {
+	                         boolean simulate) {
 
 		if (container.getTagCompound() == null
 				|| !container.getTagCompound().hasKey("Energy")) {
