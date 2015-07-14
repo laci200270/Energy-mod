@@ -23,17 +23,3 @@
 /*.ipr
 /*.iws
 /atlassian-ide-plugin.xml
-
-#minecraft
-/usernamecache.json
-usernamecache.json
-options.txt
-/saves
-/config
-/mods
-/resourcepacks
-/screenshoots
-/logs
-/crash-reports
-*.lock
-*.lock
