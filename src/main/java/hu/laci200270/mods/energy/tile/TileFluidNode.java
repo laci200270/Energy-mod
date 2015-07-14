@@ -142,20 +142,20 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 			@SuppressWarnings("unchecked") //safe because we only get the positions of fluid pipes
 			
 			TileEntity te = world.getTileEntity(current);
-			if (te instanceof FluidOutput) {
+			if (current != pos && te instanceof FluidOutput) {
 				FluidOutput currentPipe = (FluidOutput) world.getTileEntity(current);
 				EnergyMod.logger.info("Scanning block at:");
 				EnergyMod.logger.info("x:" + pos.getX());
 				EnergyMod.logger.info("y:" + pos.getY());
 				EnergyMod.logger.info("z:" + pos.getZ());
 				EnergyMod.logger.info("Block type is:" + world.getBlockState(pos).getBlock().getLocalizedName());
-				if (canOutput(pos, world))
+				if (canOutput(current, world))
 					return Optional.of(current);
 			}
 			checked.add(current);
-			for (BlockPos pos1: getNeighborPipeBlocks(pos, world)) {
-				if (!checked.contains(pos1))
-						queue.add(pos1);
+			for (BlockPos p : getNeighborPipeBlocks(current, world)) {
+				if (!checked.contains(p))
+					queue.add(p);
 			}
 		}
 		
