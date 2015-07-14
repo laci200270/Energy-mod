@@ -137,7 +137,6 @@ public class TileFluidNode extends TileEntity implements IFluidTank, IUpdatePlay
 			
 			TileEntity te = world.getTileEntity(current);
 			if (current != pos && te instanceof FluidOutput) {
-				FluidOutput currentPipe = (FluidOutput) world.getTileEntity(current);
 				if (canOutput(current, world))
 					return Optional.of(current);
 			}
