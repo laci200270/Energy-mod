@@ -1,14 +1,11 @@
 package hu.laci200270.mods.energy.tile;
 
-import hu.laci200270.mods.energy.EnergyMod;
 import hu.laci200270.mods.energy.block.BlockUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
