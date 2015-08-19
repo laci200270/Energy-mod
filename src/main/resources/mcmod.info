@@ -1,0 +1,16 @@
+[
+{
+  "modid": "energymod",
+  "name": "Energy Mod",
+  "description": "Example placeholder mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["laci200270"],
+  "credits": "Vanhal for the RF fork to 1.8",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
