@@ -1,0 +1,71 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "east": {
+      "0": {
+      },
+      "1": {
+        "submodel": "torch",
+        "y": 0
+      },
+      "2": {
+        "submodel": "torch"
+      }
+    },
+    "west": {
+      "0": {
+      },
+      "1": {
+        "submodel": "torch",
+        "y": 0
+      },
+      "2": {
+        "submodel": "torch"
+      }
+    },
+    "south": {
+      "0": {
+      },
+      "1": {
+        "submodel": "torch",
+        "y": 0
+      },
+      "2": {
+        "submodel": "torch"
+      }
+    },
+    "north": {
+      "0": {
+      },
+      "1": {
+        "submodel": "torch",
+        "y": 0
+      },
+      "2": {
+        "submodel": "torch"
+      }
+    },
+    "up": {
+      "0": {
+      },
+      "1": {
+        "submodel": "torch",
+        "y": 0
+      },
+      "2": {
+        "submodel": "torch"
+      }
+    },
+    "down": {
+      "0": {
+      },
+      "1": {
+        "submodel": "torch",
+        "y": 0
+      },
+      "2": {
+        "submodel": "torch"
+      }
+    }
+  }
+}
