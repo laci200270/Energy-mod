@@ -24,7 +24,7 @@ public class EnergyConduit extends Block {
     public static final PropertyInteger EAST = PropertyInteger.create("east",0,2);
     public static final PropertyInteger SOUTH = PropertyInteger.create("south",0,2);
     public static final PropertyInteger WEST = PropertyInteger.create("west",0,2);
-    public static final PropertyInteger NORTTH = PropertyInteger.create("north",0,2);
+    public static final PropertyInteger NORTH = PropertyInteger.create("north", 0, 2);
     public static final PropertyInteger UP = PropertyInteger.create("up",0,2);
     public static final PropertyInteger DOWN = PropertyInteger.create("down",0,2);
 
@@ -36,10 +36,10 @@ public class EnergyConduit extends Block {
     }
 
     @Override
-    public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         state=state.withProperty(EAST,generateState(EnumFacing.EAST,world,pos));
         state=state.withProperty(WEST,generateState(EnumFacing.WEST,world,pos));
-        state=state.withProperty(NORTTH,generateState(EnumFacing.NORTH,world,pos));
+        state = state.withProperty(NORTH, generateState(EnumFacing.NORTH, world, pos));
         state=state.withProperty(SOUTH,generateState(EnumFacing.SOUTH,world,pos));
         state=state.withProperty(UP,generateState(EnumFacing.UP,world,pos));
         state=state.withProperty(DOWN,generateState(EnumFacing.DOWN,world,pos));
@@ -57,6 +57,11 @@ public class EnergyConduit extends Block {
 
     }
 
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
+
     private int generateState(EnumFacing facing,IBlockAccess world,BlockPos pos){
         if(world.getBlockState(pos.offset(facing)).getBlock()== EnergyMod.conduitEnergy){
             return 1;
@@ -66,5 +71,10 @@ public class EnergyConduit extends Block {
         }
         else
             return 0;
+    }
+
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, EAST, SOUTH, WEST, UP, DOWN, NORTH);
     }
 }

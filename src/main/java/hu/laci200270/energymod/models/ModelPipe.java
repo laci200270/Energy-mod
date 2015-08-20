@@ -2,11 +2,8 @@ package hu.laci200270.energymod.models;
 
 import hu.laci200270.energymod.blocks.EnergyConduit;
 import hu.laci200270.energymod.enums.EnumPipeState;
-import hu.laci200270.energymod.enums.EnumRenderPlace;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.item.ItemStack;
@@ -44,7 +41,7 @@ public class ModelPipe implements IBakedModel,ISmartBlockModel,ISmartItemModel{
         worldHashMap.put(EnumFacing.EAST,parseInteger((Integer)iBlockState.getValue(EnergyConduit.EAST)));
         worldHashMap.put(EnumFacing.WEST,parseInteger((Integer)iBlockState.getValue(EnergyConduit.WEST)));
         worldHashMap.put(EnumFacing.SOUTH,parseInteger((Integer)iBlockState.getValue(EnergyConduit.SOUTH)));
-        worldHashMap.put(EnumFacing.NORTH,parseInteger((Integer)iBlockState.getValue(EnergyConduit.NORTTH)));
+        worldHashMap.put(EnumFacing.NORTH, parseInteger((Integer) iBlockState.getValue(EnergyConduit.NORTH)));
         return new ModelPipe(worldHashMap);
 
     }
