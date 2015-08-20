@@ -1,5 +1,8 @@
 {
   "forge_marker": 1,
+  "defaults": {
+    "model:": "energymod/core"
+  },
   "variants": {
     "east": {
       "0": {
