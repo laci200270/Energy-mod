@@ -15,8 +15,8 @@ public class BakeEventHandler {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void bakeEvent(ModelBakeEvent event){
-        Object obj event.modelRegistry.getObject(new ModelResourceLocation("energymod:eConduit", "normal"));
-        event.modelRegistry.putObject(new ModelResourceLocation("energymod:eConduit", "normal"), new ModelPipe(obj));
+        Object obj = event.modelRegistry.getObject(new ModelResourceLocation("energymod:eConduit", "normal"));
+        event.modelRegistry.putObject(new ModelResourceLocation("energymod:eConduit", "normal"), new ModelPipe(null));
     }
 
 }
