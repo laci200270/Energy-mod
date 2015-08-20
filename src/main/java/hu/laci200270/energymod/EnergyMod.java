@@ -24,7 +24,7 @@ public class EnergyMod {
 
     public static Logger logger=null;
 
-    @SubscribeEvent
+    @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         logger=event.getModLog();
         logger.info("Lot of energy runs through of Minecraft 1.8!");
@@ -34,7 +34,7 @@ public class EnergyMod {
         GameRegistry.registerBlock(conduitEnergy, "eConduit");
         GameRegistry.registerTileEntity(TileEnergyConduit.class, "teConduit");
         MinecraftForge.EVENT_BUS.register(new BakeEventHandler());
-        //FMLInterModComms.sendMessage("waila",)
+
     }
     
 }
