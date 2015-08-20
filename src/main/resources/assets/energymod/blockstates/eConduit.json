@@ -8,66 +8,66 @@
       "0": {
       },
       "1": {
-        "submodel": "torch",
+        "submodel": "minecraft:acacia_log",
         "y": 0
       },
       "2": {
-        "submodel": "torch"
+        "submodel": "minecraft:acacia_log"
       }
     },
     "west": {
       "0": {
       },
       "1": {
-        "submodel": "torch",
+        "submodel": "minecraft:acacia_log",
         "y": 0
       },
       "2": {
-        "submodel": "torch"
+        "submodel": "minecraft:acacia_log"
       }
     },
     "south": {
       "0": {
       },
       "1": {
-        "submodel": "torch",
+        "submodel": "minecraft:acacia_log",
         "y": 0
       },
       "2": {
-        "submodel": "torch"
+        "submodel": "minecraft:acacia_log"
       }
     },
     "north": {
       "0": {
       },
       "1": {
-        "submodel": "torch",
+        "submodel": "minecraft:acacia_log",
         "y": 0
       },
       "2": {
-        "submodel": "torch"
+        "submodel": "minecraft:acacia_log"
       }
     },
     "up": {
       "0": {
       },
       "1": {
-        "submodel": "torch",
+        "submodel": "minecraft:acacia_log",
         "y": 0
       },
       "2": {
-        "submodel": "torch"
+        "submodel": "minecraft:acacia_log"
       }
     },
     "down": {
       "0": {
       },
       "1": {
-        "submodel": "torch",
+        "submodel": "minecraft:acacia_log",
         "y": 0
       },
       "2": {
-        "submodel": "torch"
+        "submodel": "minecraft:acacia_log"
       }
     }
   }
