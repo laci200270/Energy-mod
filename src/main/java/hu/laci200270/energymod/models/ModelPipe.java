@@ -3,6 +3,7 @@ package hu.laci200270.energymod.models;
 import hu.laci200270.energymod.blocks.EnergyConduit;
 import hu.laci200270.energymod.enums.EnumPipeState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.IBakedModel;
@@ -10,7 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
+import net.minecraftforge.client.model.MultiModel;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +34,8 @@ public class ModelPipe implements IBakedModel,ISmartBlockModel,ISmartItemModel{
     }
 
     public ModelPipe(HashMap<EnumFacing,EnumPipeState> values){
-
+        //IModel oakLog= Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes();
+        MultiModel model = new MultiModel.Baked()
     }
     @Override
     public IBakedModel handleBlockState(IBlockState iBlockState) {
@@ -40,7 +44,8 @@ public class ModelPipe implements IBakedModel,ISmartBlockModel,ISmartItemModel{
         worldHashMap.put(EnumFacing.UP,parseInteger((Integer)iBlockState.getValue(EnergyConduit.UP)));
         worldHashMap.put(EnumFacing.EAST,parseInteger((Integer)iBlockState.getValue(EnergyConduit.EAST)));
         worldHashMap.put(EnumFacing.WEST,parseInteger((Integer)iBlockState.getValue(EnergyConduit.WEST)));
-        worldHashMap.put(EnumFacing.SOUTH,parseInteger((Integer)iBlockState.getValue(EnergyConduit.SOUTH)));
+        worldHashMap.put(EnumFacing.SOUTH, parseInteger((Integer) iBlockState.getValue(EnergyConduit.SOUTH)));
+
         worldHashMap.put(EnumFacing.NORTH, parseInteger((Integer) iBlockState.getValue(EnergyConduit.NORTH)));
         return new ModelPipe(worldHashMap);
 
@@ -53,6 +58,9 @@ public class ModelPipe implements IBakedModel,ISmartBlockModel,ISmartItemModel{
 
     @Override
     public List getFaceQuads(EnumFacing enumFacing) {
+        ArrayList<BakedQuad> quads = new ArrayList<BakedQuad>();
+
+
         return Collections.emptyList();
     }
 

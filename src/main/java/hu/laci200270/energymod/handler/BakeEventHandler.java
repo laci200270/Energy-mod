@@ -1,7 +1,6 @@
 package hu.laci200270.energymod.handler;
 
 import hu.laci200270.energymod.EnergyMod;
-import hu.laci200270.energymod.models.ModelPipe;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,7 +17,7 @@ public class BakeEventHandler {
     public void bakeEvent(ModelBakeEvent event){
         Object obj = event.modelRegistry.getObject(new ModelResourceLocation("energymod:eConduit"));
         EnergyMod.logger.info("Bake event");
-        event.modelRegistry.putObject(new ModelResourceLocation("energymod:eConduit"), new ModelPipe(null));
+        // event.modelRegistry.putObject(new ModelResourceLocation("energymod:eConduit"), new ModelPipe(null));
     }
 
 }

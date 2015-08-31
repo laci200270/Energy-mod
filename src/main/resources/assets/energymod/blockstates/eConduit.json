@@ -1,73 +1,73 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model:": "energymod/core"
+    "model": "energymod:core"
   },
   "variants": {
     "east": {
-      "0": {
+      0: {
       },
-      "1": {
-        "submodel": "minecraft:acacia_log",
+      1: {
+        "model": "minecraft:torch",
         "y": 0
       },
-      "2": {
-        "submodel": "minecraft:acacia_log"
+      2: {
+        "model": "minecraft:torch"
       }
     },
     "west": {
-      "0": {
+      0: {
       },
-      "1": {
-        "submodel": "minecraft:acacia_log",
+      1: {
+        "model": "minecraft:torch",
         "y": 0
       },
-      "2": {
-        "submodel": "minecraft:acacia_log"
+      2: {
+        "model": "minecraft:torch"
       }
     },
     "south": {
-      "0": {
+      0: {
       },
-      "1": {
-        "submodel": "minecraft:acacia_log",
+      1: {
+        "model": "minecraft:torch",
         "y": 0
       },
-      "2": {
-        "submodel": "minecraft:acacia_log"
+      2: {
+        "model": "minecraft:torch"
       }
     },
     "north": {
-      "0": {
+      0: {
       },
-      "1": {
-        "submodel": "minecraft:acacia_log",
+      1: {
+        "model": "minecraft:torch",
         "y": 0
       },
-      "2": {
-        "submodel": "minecraft:acacia_log"
+      2: {
+        "model": "minecraft:torch"
       }
     },
     "up": {
-      "0": {
+      0: {
       },
-      "1": {
-        "submodel": "minecraft:acacia_log",
+      1: {
+        "model": "minecraft:torch",
         "y": 0
       },
-      "2": {
-        "submodel": "minecraft:acacia_log"
+      2: {
+        "model": "minecraft:torch"
       }
     },
     "down": {
-      "0": {
+      0: {
       },
-      "1": {
-        "submodel": "minecraft:acacia_log",
+      1: {
+        "model": "minecraft:torch",
         "y": 0
       },
-      "2": {
-        "submodel": "minecraft:acacia_log"
+      2: {
+        "model": "minecraft:torch"
       }
     }
   }

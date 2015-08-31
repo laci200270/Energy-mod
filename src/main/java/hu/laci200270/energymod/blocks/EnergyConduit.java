@@ -77,4 +77,6 @@ public class EnergyConduit extends Block {
     protected BlockState createBlockState() {
         return new BlockState(this, EAST, SOUTH, WEST, UP, DOWN, NORTH);
     }
+
+
 }
