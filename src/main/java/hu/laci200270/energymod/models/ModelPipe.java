@@ -5,14 +5,15 @@ import hu.laci200270.energymod.enums.EnumPipeState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.IBakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.model.ISmartBlockModel;
-import net.minecraftforge.client.model.ISmartItemModel;
-import net.minecraftforge.client.model.MultiModel;
+import net.minecraftforge.client.model.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -34,8 +35,15 @@ public class ModelPipe implements IBakedModel,ISmartBlockModel,ISmartItemModel{
     }
 
     public ModelPipe(HashMap<EnumFacing,EnumPipeState> values){
-        //IModel oakLog= Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getBlockModelShapes();
-        MultiModel model = new MultiModel.Baked()
+        IModel oakLog = null;
+        try {
+            oakLog = ModelLoaderRegistry.getModel(new ModelResourceLocation("minecraft:oaklog"));
+            MultiModel model = new MultiModel(oakLog, new TRSRTransformation(ItemTransformVec3f.DEFAULT));
+            new
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     @Override
     public IBakedModel handleBlockState(IBlockState iBlockState) {

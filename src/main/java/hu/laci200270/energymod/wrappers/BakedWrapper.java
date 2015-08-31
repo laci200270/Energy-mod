@@ -1,10 +1,12 @@
 package hu.laci200270.energymod.wrappers;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.IBakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 
@@ -24,6 +26,9 @@ public class BakedWrapper implements IFlexibleBakedModel {
         this.source = source;
     }
 
+    public BakedWrapper(String resLoc) {
+        this(Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getModel(new ModelResourceLocation("minecraft:oaklog")));
+    }
 
     @Override
     public List<BakedQuad> getFaceQuads(EnumFacing side) {
