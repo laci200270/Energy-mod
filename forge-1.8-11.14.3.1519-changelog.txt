@@ -1,5 +1,106 @@
 Changelog:
-Build 1502:
+Build 1519:
+	fry: '#' is now added automatically to the beginning of the texture names in B3D models, and the remapping is expected via the blockstate JSON, since it's more reasonable than adding it to the file name in the modelling program or matching the resource location with the filename.
+
+Build 1.8-11.14.3.1518:
+	fry: Fixes Attributes.transform affecting only 1 vertex.
+
+Build 1.7.10-10.13.4.1517-1.7.10:
+	bjoern:
+		Fix possible crash in EventBus
+		
+		There is currently no way to check if an event handler has been registered or not.
+		But when trying to unregister a not-registered event handler, Minecraft crashes with a NullPointerException.
+		This is a simple fix to prevent such crashes.
+
+Build 1.8-11.14.3.1516:
+	luacs1998: Fix a possible crash in EventBus
+
+Build 1.8-11.14.3.1515:
+	rubensworks: Fix dispenser action for modded spawn eggs
+
+Build 1.8-11.14.3.1514:
+	LexManos: Update Gradle wrapper to 2.7
+	LexManos: Fix entity count being incorrect for spawning logic. Now filter out 'persistant' entities.
+
+Build 1.8-11.14.3.1513:
+	foka_12: Disallow conflicting furnace recipes
+
+Build 1.8-11.14.3.1512:
+	fry: Workaround for MinecraftForge/ForgeGradle#256
+
+Build 1.8-11.14.3.1511:
+	cpw:
+		FMLNetworkHandler.openGui should not try and open a GUI on a FakePlayer.
+		Fixes #2082 and probably dozens of mod errors. Also, side benefit of the
+		merged codebase! FML code can ref Forge code!
+
+Build 1.8-11.14.3.1510:
+	laci200270: Update FMLSecurityManager.java
+	cpw: Format a bit better
+
+Build 1.8-11.14.3.1509:
+	fry: Much requested temporary hack for items and TESRs. Context: #1582, #1597, #1713, #2058 and others.
+
+Build 1.8-11.14.3.1508:
+	vorquel: Fix faulty Channel name
+
+Build 1.8-11.14.3.1507:
+	simonbarnes1: Use already provided profile for the player's own skin
+
+Build 1.8-11.14.3.1506:
+	cpw:
+		More cleanup of the default eclipse workspace. The project is now called "MDKExample" not "Minecraft".
+		The project tree is now contemporary, instead of a copy from 1.5.x era MC. The launches are cleaned up, and refer to
+		a better default "runDir" of "run" rather than "eclipse".. Updating to FG2.0.1 which will contain relevant binary fixes.
+
+Build 1.8-11.14.3.1505:
+	cpw: Fix eclipse workspace inside the mdk - don't run it through the tokenconverter. Also add in CREDITS-fml.txt to the MDK - it's still required.
+
+Build 1.8-11.14.3.1504:
+	LexManos:
+		Fixed issue where config folder would not be created before SplashProgress tried to read from it.
+		Default macs to disable the new loading screen due to to many macs having issues.
+		Users can enable it again by editing their config.
+		Catch and gracefully handle more errors when starting up the Splash Screen.
+
+Build 1.8-11.14.3.1503:
+	diesieben07: Re-introduce RenderBlockOverlayEvent, seems to have been missed during 1.8 update
+	Abrar Syed: removed broken and duplicate AT lines
+	Abrar Syed: added hardcoded fml version file
+	Abrar Syed: DeobfuscationData no longer required at dev time
+	Abrar Syed: removed old unnecessary stuff
+	Abrar Syed: Added FG2 buildscript + updated for Gradle 2.4
+	Abrar Syed: added jenkins compat tasks
+	Abrar Syed: fixed local-building fail with changelog
+	Abrar Syed: updated installed gradle. not finished
+	Abrar Syed: fixed deployment credentials
+	cpw: FML is no more. FML has ceased to be. FML's expired and gone to meet its maker. FML's a stiff! Bereft of life, FML rests in peace.
+	cpw: Vestigal fml-ectomy.
+	cpw:
+		FML's metabolic processes are now history. FML's off the twig. FML's kicked the bucket, FML's shuffled off this mortal coil,
+		run down the curtain and joined the bleedin' choir invisible!! THIS IS AN EX-PROJECT!
+	Abrar Syed: added MDK package
+	cpw: Fix MDK task - it now runs.
+	cpw: The final nail in the coffin. BYE!
+	cpw:
+		Trying to fix the MDK to include gradle wrapper, but the gradle-wrapper.jar is
+		corrupted. @AbrarSyed can you take a look?
+	cpw:
+		Fix packaging the gradle wrapper properly. There is still a problem with
+		the MDK- it fails to run setupDecompWorkspace.
+		
+		Filed an issue at ForgeGradle, since this seems to be something FG2 shouldn't
+		be doing, but is?
+		
+		https://github.com/MinecraftForge/ForgeGradle/issues/235
+	cpw: Remove patches
+	cpw: Fix ciWriteBuildNumber task. Ugly, but it works.
+	cpw: Fix crowdin task. Good luck jenkins, lets roll!
+	cpw: Fix crowdin again. Run, jenkins, for god's sake, run!
+	LexManos: Update gradle wrapper and fix changelog task.
+
+Build 1.8-11.14.3.1502:
 	cpw: ObjectHolder works great, but it should be a lot less spammy about failed lookups. They're usually mod options.
 	cpw: Actually rebuild the fluidNames each rebuild, don't just try and force changes in. Should fix #1973
 	cpw:
@@ -18,7 +119,7 @@ Build 1.8-11.14.3.1499:
 	glstillman: Fixed a bug with ExtendedBlockStates containing at least one IProperty and one IUnlistedProperty not allowing blocks to be placed.
 
 Build 1.8-11.14.3.1498:
-	liangchenblue: Add an EnumHelper hook and fixed an issue
+	liach: Add an EnumHelper hook and fixed an issue
 
 Build 1.8-11.14.3.1497:
 	simonbarnes1: Fix placing signs with NBT prompting for text
@@ -1908,7 +2009,7 @@ Build 1.7.10-10.13.0.1174:
 		
 		Added block XYZ parameters
 		
-		TODO, the second block overlay event???s XYZ might not be correct
+		TODO, the second block overlay event’s XYZ might not be correct
 	Adubbz: Enhanced the Biome Dictionary with tags based on temperature, vegetation, moisture, trees and others
 
 Build 1.7.10-10.13.0.1172:
@@ -2779,7 +2880,7 @@ Build 1.7.2-10.12.0.993:
 	LexManos: Fix DoublePlant placement, closes #921
 
 Build 1.7.2-10.12.0.991:
-	?????????????? ?????????? ????????????????????: Create ru_RU.lang
+	смирнов антон михайлович: Create ru_RU.lang
 
 Build 1.7.2-10.12.0.990:
 	Christian:
@@ -6310,7 +6411,7 @@ Build 6.0.1.345:
 	CovertJaguar:
 		Added vanilla wood + dye to the Ore Dict
 		
-		Should help??simplify??interaction between mods that add similar items.
+		Should help simplify interaction between mods that add similar items.
 	LexManos: Added Stonghold, Village, and Spawn biome management helpers for PR 207
 	LexManos: Fix compile issue.
 
