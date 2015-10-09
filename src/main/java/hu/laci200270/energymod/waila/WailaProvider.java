@@ -1,17 +1,16 @@
-package hu.laci200270.energymod.waila;
-
+/*package hu.laci200270.energymod.waila;
 import hu.laci200270.energymod.tile.TileEnergyConduit;
 import mcp.mobius.waila.api.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.StatCollector;*/
 
 /**
  * @author laci200270
  * @date 2015.08.16.
  */
-public class WailaProvider implements IWailaDataProvider {
+/*public class WailaProvider implements IWailaDataProvider {
     @Override
     public ItemStack getWailaStack(IWailaDataAccessor iWailaDataAccessor, IWailaConfigHandler iWailaConfigHandler) {
         return null;
@@ -41,4 +40,4 @@ public class WailaProvider implements IWailaDataProvider {
     public NBTTagCompound getNBTData(TileEntity tileEntity, NBTTagCompound nbtTagCompound, IWailaDataAccessorServer iWailaDataAccessorServer) {
         return nbtTagCompound;
     }
-}
+}*/
