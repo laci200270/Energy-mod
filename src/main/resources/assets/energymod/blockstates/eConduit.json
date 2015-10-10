@@ -1,73 +1,74 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "minecraft:oak_log"
+    "model": "energymod:core"
+
   },
   "variants": {
     "east": {
       "none": {
       },
       "transfer": {
-        "model": "energymod:tube",
+        "submodel": "energymod:tube",
         "y": 180
       },
       "connected": {
-        "model": "energymod:tube"
+        "submodel": "energymod:tube"
       }
     },
     "west": {
       "none": {
       },
       "transfer": {
-        "model": "energymod:tube",
+        "submodel": "energymod:tube",
         "y": 0
       },
       "connected": {
-        "model": "energymod:tube"
+        "submodel": "energymod:tube"
       }
     },
     "south": {
       "none": {
       },
       "transfer": {
-        "model": "energymod:tube",
+        "submodel": "energymod:tube",
         "y": 270
       },
       "connected": {
-        "model": "energymod:tube"
+        "submodel": "energymod:tube"
       }
     },
     "north": {
       "none": {
       },
       "transfer": {
-        "model": "energymod:tube",
+        "submodel": "energymod:tube",
         "y": 90
       },
       "connected": {
-        "model": "energymod:tube"
+        "submodel": "energymod:tube"
       }
     },
     "up": {
       "none": {
       },
       "transfer": {
-        "model": "energymod:tube",
-        "y": 0
+        "submodel": "energymod:tube",
+        "x": 90
       },
       "connected": {
-        "model": "energymod:tube"
+        "submodel": "energymod:tube"
       }
     },
     "down": {
       "none": {
       },
       "transfer": {
-        "model": "energymod:tube",
-        "y": 0
+        "submodel": "energymod:tube",
+        "x": 270
       },
       "connected": {
-        "model": "energymod:tube"
+        "submodel": "energymod:tube"
       }
     }
   }
