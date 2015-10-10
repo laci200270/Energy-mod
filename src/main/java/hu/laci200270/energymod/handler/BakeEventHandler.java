@@ -18,8 +18,9 @@ public class BakeEventHandler {
     public void bakeEvent(ModelBakeEvent event){
         //Object obj = event.modelRegistry.getObject(new ModelResourceLocation("energymod:eConduit"));
         EnergyMod.logger.info("Bake event");
+        event.modelRegistry.putObject(new ModelResourceLocation("energymod:eConduit#inventory"), new ModelPipe(null));
+        // Minecraft.getMinecraft().getRenderItem().getItemModelMesher().
 
-         event.modelRegistry.putObject(event.modelRegistry.getObject("energymod:eConduit"), new ModelPipe(null));
     }
 
 }

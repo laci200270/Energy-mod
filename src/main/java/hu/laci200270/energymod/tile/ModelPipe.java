@@ -3,11 +3,11 @@ package hu.laci200270.energymod.tile;
 import com.google.common.collect.ImmutableMap;
 import hu.laci200270.energymod.blocks.EnergyConduit;
 import hu.laci200270.energymod.enums.EnumPipeState;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
@@ -23,11 +23,12 @@ import java.util.List;
  * Created by Laci on 2015.10.09..
  */
 @SuppressWarnings(value = "deprecated,unused")
-public class ModelPipe implements ISmartBlockModel,ISmartItemModel,IBakedModel {
+public class ModelPipe implements ISmartBlockModel, ISmartItemModel {
 
 
     protected static HashMap<EnumFacing,EnumPipeState> inventoryHashMap=new HashMap<EnumFacing,EnumPipeState>();
-
+    public static MultiModel model = null;
+    private IBakedModel baked = null;
     static {
         for (EnumFacing current: EnumFacing.VALUES){
             inventoryHashMap.put(current,EnumPipeState.NONE);
@@ -48,8 +49,8 @@ public class ModelPipe implements ISmartBlockModel,ISmartItemModel,IBakedModel {
 
                 }
             }
-            MultiModel model = new MultiModel(oakLog,null, models.build());
-
+            model = new MultiModel(oakLog, null, models.build());
+            baked = model.bake(ItemTransformVec3f.DEFAULT, new VertexFormat(), null);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,41 +83,42 @@ public class ModelPipe implements ISmartBlockModel,ISmartItemModel,IBakedModel {
 
     @Override
     public IBakedModel handleItemState(ItemStack stack) {
-        return null;
+        return new ModelPipe(inventoryHashMap);
     }
+
 
     @Override
     public List getFaceQuads(EnumFacing p_177551_1_) {
-        return null;
+        return baked.getFaceQuads(p_177551_1_);
     }
 
     @Override
     public List getGeneralQuads() {
-        return null;
+        return baked.getGeneralQuads();
     }
 
     @Override
     public boolean isAmbientOcclusion() {
-        return false;
+        return baked.isAmbientOcclusion();
     }
 
     @Override
     public boolean isGui3d() {
-        return false;
+        return baked.isGui3d();
     }
 
     @Override
     public boolean isBuiltInRenderer() {
-        return false;
+        return baked.isBuiltInRenderer();
     }
 
     @Override
     public TextureAtlasSprite getTexture() {
-        return null;
+        return baked.getTexture();
     }
 
     @Override
     public ItemCameraTransforms getItemCameraTransforms() {
-        return ItemCameraTransforms.DEFAULT;
+        return baked.getItemCameraTransforms();
     }
 }
