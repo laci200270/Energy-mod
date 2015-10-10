@@ -1,17 +1,17 @@
 package hu.laci200270.energymod.tile;
 
+import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
-import hu.laci200270.energymod.blocks.EnergyConduit;
 import hu.laci200270.energymod.enums.EnumPipeState;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.*;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -22,18 +22,20 @@ import java.util.List;
 /**
  * Created by Laci on 2015.10.09..
  */
-@SuppressWarnings(value = "deprecated,unused")
-public class ModelPipe implements ISmartBlockModel, ISmartItemModel {
+@SuppressWarnings("ALL")
+public class ModelPipe implements IBakedModel {
 
 
-    protected static HashMap<EnumFacing,EnumPipeState> inventoryHashMap=new HashMap<EnumFacing,EnumPipeState>();
     public static MultiModel model = null;
-    private IBakedModel baked = null;
+    protected static HashMap<EnumFacing, EnumPipeState> inventoryHashMap = new HashMap<EnumFacing, EnumPipeState>();
+
     static {
         for (EnumFacing current: EnumFacing.VALUES){
             inventoryHashMap.put(current,EnumPipeState.NONE);
         }
     }
+
+    private IBakedModel baked = null;
 
     public ModelPipe(HashMap<EnumFacing,EnumPipeState> world){
         IModel oakLog = null;
@@ -49,39 +51,20 @@ public class ModelPipe implements ISmartBlockModel, ISmartItemModel {
 
                 }
             }
-            model = new MultiModel(oakLog, null, models.build());
-            baked = model.bake(ItemTransformVec3f.DEFAULT, new VertexFormat(), null);
+            model = new MultiModel(oakLog, new TRSRTransformation(ItemTransformVec3f.DEFAULT), models.build());
+            Function<ResourceLocation, TextureAtlasSprite> textureGetter = new Function<ResourceLocation, TextureAtlasSprite>() {
+                public TextureAtlasSprite apply(ResourceLocation location) {
+                    return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
+                }
+            };
+            baked = model.bake(ItemTransformVec3f.DEFAULT, Attributes.DEFAULT_BAKED_FORMAT, textureGetter);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    private EnumPipeState parseInteger(int i){
-        if(i==0)
-            return EnumPipeState.NONE;
-        if(i==1)
-            return EnumPipeState.TRANSFER;
-        if (i==2)
-            return EnumPipeState.CONNECTED;
-        return null;
 
-    }
-    @Override
-    public IBakedModel handleBlockState(IBlockState iBlockState) {
-        HashMap<EnumFacing,EnumPipeState> worldHashMap=new HashMap<EnumFacing, EnumPipeState>();
-        worldHashMap.put(EnumFacing.DOWN,parseInteger((Integer)iBlockState.getValue(EnergyConduit.DOWN)));
-        worldHashMap.put(EnumFacing.UP,parseInteger((Integer)iBlockState.getValue(EnergyConduit.UP)));
-        worldHashMap.put(EnumFacing.EAST,parseInteger((Integer)iBlockState.getValue(EnergyConduit.EAST)));
-        worldHashMap.put(EnumFacing.WEST,parseInteger((Integer)iBlockState.getValue(EnergyConduit.WEST)));
-        worldHashMap.put(EnumFacing.SOUTH, parseInteger((Integer) iBlockState.getValue(EnergyConduit.SOUTH)));
-
-        worldHashMap.put(EnumFacing.NORTH, parseInteger((Integer) iBlockState.getValue(EnergyConduit.NORTH)));
-        return new ModelPipe(worldHashMap);
-
-    }
-
-    @Override
     public IBakedModel handleItemState(ItemStack stack) {
         return new ModelPipe(inventoryHashMap);
     }
