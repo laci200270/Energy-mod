@@ -1,0 +1,74 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:oak_log"
+  },
+  "variants": {
+    "east": {
+      "none": {
+      },
+      "transfer": {
+        "model": "energymod:tube",
+        "y": 180
+      },
+      "connected": {
+        "model": "energymod:tube"
+      }
+    },
+    "west": {
+      "none": {
+      },
+      "transfer": {
+        "model": "energymod:tube",
+        "y": 0
+      },
+      "connected": {
+        "model": "energymod:tube"
+      }
+    },
+    "south": {
+      "none": {
+      },
+      "transfer": {
+        "model": "energymod:tube",
+        "y": 240
+      },
+      "connected": {
+        "model": "energymod:tube"
+      }
+    },
+    "north": {
+      "none": {
+      },
+      "transfer": {
+        "model": "energymod:tube",
+        "y": 90
+      },
+      "connected": {
+        "model": "energymod:tube"
+      }
+    },
+    "up": {
+      "none": {
+      },
+      "transfer": {
+        "model": "energymod:tube",
+        "y": 0
+      },
+      "connected": {
+        "model": "energymod:tube"
+      }
+    },
+    "down": {
+      "none": {
+      },
+      "transfer": {
+        "model": "energymod:tube",
+        "y": 0
+      },
+      "connected": {
+        "model": "energymod:tube"
+      }
+    }
+  }
+}

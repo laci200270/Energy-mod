@@ -103,4 +103,8 @@ public class EnergyConduit extends Block {
     }
 
 
+    @Override
+    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+        return true;
+    }
 }

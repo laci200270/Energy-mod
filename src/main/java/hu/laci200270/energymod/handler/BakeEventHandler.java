@@ -1,10 +1,8 @@
 package hu.laci200270.energymod.handler;
 
 import hu.laci200270.energymod.EnergyMod;
-import hu.laci200270.energymod.enums.EnumPipeState;
 import hu.laci200270.energymod.tile.ModelPipe;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -12,7 +10,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 
@@ -42,7 +39,7 @@ public class BakeEventHandler {
         EnergyMod.logger.info("Bake event");
         event.modelRegistry.putObject(new ModelResourceLocation("energymod:eConduit#inventory"), new ModelPipe(null));
         ArrayList<String> all = new ArrayList<String>();
-        for (int i = 0; i < 729; i++) {
+        /** for (int i = 0; i < 729; i++) {
             int east = 0;
             int west = 0;
             int south = 0;
@@ -88,7 +85,7 @@ public class BakeEventHandler {
             event.modelRegistry.putObject(new ModelResourceLocation(key), new ModelPipe(map));
 
 
-        }
+         }*/
 
 
     }

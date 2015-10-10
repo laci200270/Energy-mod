@@ -2,6 +2,7 @@ package hu.laci200270.energymod.tile;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
+import hu.laci200270.energymod.EnergyMod;
 import hu.laci200270.energymod.enums.EnumPipeState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -36,11 +37,16 @@ public class ModelPipe implements IBakedModel {
     }
 
     private IBakedModel baked = null;
-
     public ModelPipe(HashMap<EnumFacing,EnumPipeState> world){
         IModel oakLog = null;
         try {
-            oakLog = ModelLoaderRegistry.getModel(new ModelResourceLocation("minecraft:block/oak_log"));
+            oakLog = ModelLoaderRegistry.getModel(new ModelResourceLocation("minecraft:block/oak_log#normal"));
+            //EnergyMod.logger.info("Number of oak's general quads is:" +oakLog.bake(ItemTransformVec3f.DEFAULT, Attributes.DEFAULT_BAKED_FORMAT, textureGetter).);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+
             ImmutableMap.Builder<String, Pair<IModel, IModelState>> models = ImmutableMap.builder();
            if(world==null){
                world=inventoryHashMap;
@@ -51,14 +57,16 @@ public class ModelPipe implements IBakedModel {
 
                 }
             }
-            model = new MultiModel(oakLog, new TRSRTransformation(ItemTransformVec3f.DEFAULT), models.build());
+            model = new MultiModel(oakLog, oakLog.getDefaultState(), models.build());
             Function<ResourceLocation, TextureAtlasSprite> textureGetter = new Function<ResourceLocation, TextureAtlasSprite>() {
                 public TextureAtlasSprite apply(ResourceLocation location) {
                     return Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(location.toString());
                 }
             };
             baked = model.bake(ItemTransformVec3f.DEFAULT, Attributes.DEFAULT_BAKED_FORMAT, textureGetter);
-        } catch (IOException e) {
+            EnergyMod.logger.info("Number of oak's general quads is:" + oakLog.bake(ItemTransformVec3f.DEFAULT, Attributes.DEFAULT_BAKED_FORMAT, textureGetter).getGeneralQuads().size());
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -77,6 +85,7 @@ public class ModelPipe implements IBakedModel {
 
     @Override
     public List getGeneralQuads() {
+        EnergyMod.logger.info("Number of general quads:" + baked.getGeneralQuads().size());
         return baked.getGeneralQuads();
     }
 
