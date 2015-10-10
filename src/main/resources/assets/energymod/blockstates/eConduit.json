@@ -31,7 +31,7 @@
       },
       "transfer": {
         "model": "energymod:tube",
-        "y": 240
+        "y": 270
       },
       "connected": {
         "model": "energymod:tube"
