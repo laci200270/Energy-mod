@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "energymod:core"
+    "model": "energymod:tube",
 
   },
   "variants": {
@@ -54,7 +54,7 @@
       },
       "transfer": {
         "submodel": "energymod:tube",
-        "x": 90
+        "x": 270
       },
       "connected": {
         "submodel": "energymod:tube"
@@ -65,7 +65,8 @@
       },
       "transfer": {
         "submodel": "energymod:tube",
-        "x": 270
+        "x:"
+        90
       },
       "connected": {
         "submodel": "energymod:tube"
