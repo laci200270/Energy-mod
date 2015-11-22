@@ -1,14 +1,11 @@
 package hu.laci200270.energymod;
 
 import hu.laci200270.energymod.blocks.EnergyConduit;
-import hu.laci200270.energymod.handler.BakeEventHandler;
 import hu.laci200270.energymod.tile.TileEnergyConduit;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
 
 /**
@@ -34,13 +31,6 @@ public class EnergyMod {
 
         GameRegistry.registerBlock(conduitEnergy, "eConduit");
         GameRegistry.registerTileEntity(TileEnergyConduit.class, "teConduit");
-        MinecraftForge.EVENT_BUS.register(new BakeEventHandler());
-        //MinecraftForge.
-        if (event.getSide() == Side.CLIENT) {
-            //ModelLoaderRegistry.registerLoader(new ModelLoaderEnergyMod());
-
-        }
-
     }
 
 }
