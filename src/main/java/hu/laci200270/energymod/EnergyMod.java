@@ -1,9 +1,11 @@
 package hu.laci200270.energymod;
 
+import hu.laci200270.energymod.client.CreativeTabEnergyMod;
 import hu.laci200270.energymod.common.blocks.EnergyConduit;
 import hu.laci200270.energymod.common.tile.TileEnergyCell;
 import hu.laci200270.energymod.common.tile.TileEnergyConduit;
 import hu.laci200270.energymod.proxys.CommonProxy;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -19,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 public class EnergyMod {
     public static final EnergyConduit conduitEnergy=new EnergyConduit();
     public static final EnergyConduit energyCell = new EnergyConduit();
+    public static final CreativeTabs creativeTabs = new CreativeTabEnergyMod();
     @Mod.Instance(value = "energymod")
     public static EnergyMod instance;
 
@@ -39,6 +42,8 @@ public class EnergyMod {
         GameRegistry.registerTileEntity(TileEnergyConduit.class, "teConduit");
         GameRegistry.registerBlock(energyCell, "eCell");
         GameRegistry.registerTileEntity(TileEnergyCell.class, "teCell");
+
+        proxy.preInit();
 
     }
 
