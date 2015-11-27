@@ -6,5 +6,6 @@ package hu.laci200270.energymod.proxys;
 public class CommonProxy {
 
     public void preInit() {
+
     }
 }
