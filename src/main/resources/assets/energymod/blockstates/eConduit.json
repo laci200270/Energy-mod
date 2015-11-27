@@ -13,7 +13,8 @@
         "y": 180
       },
       "connected": {
-        "submodel": "energymod:tube"
+        "submodel": "energymod:tube",
+        "y": 180
       }
     },
     "west": {
@@ -24,7 +25,8 @@
         "y": 0
       },
       "connected": {
-        "submodel": "energymod:tube"
+        "submodel": "energymod:tube",
+        "y": 0
       }
     },
     "south": {
@@ -35,7 +37,8 @@
         "y": 270
       },
       "connected": {
-        "submodel": "energymod:tube"
+        "submodel": "energymod:tube",
+        "y": 270
       }
     },
     "north": {
@@ -46,7 +49,8 @@
         "y": 90
       },
       "connected": {
-        "submodel": "energymod:tube"
+        "submodel": "energymod:tube",
+        "y": 90
       }
     },
     "up": {
@@ -59,7 +63,10 @@
         }
       },
       "connected": {
-        "submodel": "energymod:tube"
+        "submodel": "energymod:tube",
+        "transform": { "rotation": { "z": 270 },
+          "translation": [-0.0625, 0, 0]
+        }
       }
     },
     "down": {
@@ -72,7 +79,8 @@
 
       },
       "connected": {
-        "submodel": "energymod:tube"
+        "submodel": "energymod:tube",
+        "transform": { "rotation": { "z": 90 } }
       }
     }
   }
