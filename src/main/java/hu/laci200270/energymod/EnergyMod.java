@@ -1,6 +1,7 @@
 package hu.laci200270.energymod;
 
 import hu.laci200270.energymod.common.blocks.EnergyConduit;
+import hu.laci200270.energymod.common.tile.TileEnergyCell;
 import hu.laci200270.energymod.common.tile.TileEnergyConduit;
 import hu.laci200270.energymod.proxys.CommonProxy;
 import net.minecraftforge.fml.common.Loader;
@@ -17,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = "energymod")
 public class EnergyMod {
     public static final EnergyConduit conduitEnergy=new EnergyConduit();
+    public static final EnergyConduit energyCell = new EnergyConduit();
     @Mod.Instance(value = "energymod")
     public static EnergyMod instance;
 
@@ -35,6 +37,8 @@ public class EnergyMod {
 
         GameRegistry.registerBlock(conduitEnergy, "eConduit");
         GameRegistry.registerTileEntity(TileEnergyConduit.class, "teConduit");
+        GameRegistry.registerBlock(energyCell, "eCell");
+        GameRegistry.registerTileEntity(TileEnergyCell.class, "teCell");
 
     }
 
