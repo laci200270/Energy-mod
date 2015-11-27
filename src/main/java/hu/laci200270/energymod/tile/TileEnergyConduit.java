@@ -16,6 +16,7 @@ import net.minecraft.util.EnumFacing;
 public class TileEnergyConduit extends TileEntity implements IEnergyHandler,IUpdatePlayerListBox{
 
     public int energyAmount=0;
+    public int maxEnergy = 1200;
 
 
     @Override
@@ -32,7 +33,14 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler,IUpd
 
     @Override
     public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
-        return 0;
+        int received = 0;
+        if (maxReceive + energyAmount > maxEnergy) {
+            received = energyAmount + maxReceive - maxReceive;
+        } else
+            received = energyAmount;
+        if (simulate)
+            this.energyAmount += received;
+        return received;
     }
 
     @Override
