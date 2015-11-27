@@ -2,8 +2,10 @@ package hu.laci200270.energymod;
 
 import hu.laci200270.energymod.common.blocks.EnergyConduit;
 import hu.laci200270.energymod.common.tile.TileEnergyConduit;
+import hu.laci200270.energymod.proxys.CommonProxy;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +23,8 @@ public class EnergyMod {
 
     public static Logger logger=null;
 
+    @SidedProxy(serverSide = "hu.laci200270.energymod.proxys.CommonProxy", clientSide = "hu.laci200270.energymod.proxys.ClientProxy")
+    CommonProxy proxy;
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         logger=event.getModLog();
@@ -31,6 +35,7 @@ public class EnergyMod {
 
         GameRegistry.registerBlock(conduitEnergy, "eConduit");
         GameRegistry.registerTileEntity(TileEnergyConduit.class, "teConduit");
+
     }
 
 }
