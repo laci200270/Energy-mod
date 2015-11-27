@@ -29,7 +29,7 @@ public class EnergyMod {
     public static Logger logger=null;
 
     @SidedProxy(serverSide = "hu.laci200270.energymod.proxys.CommonProxy", clientSide = "hu.laci200270.energymod.proxys.ClientProxy")
-    CommonProxy proxy;
+    public static CommonProxy proxy;
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         logger=event.getModLog();
