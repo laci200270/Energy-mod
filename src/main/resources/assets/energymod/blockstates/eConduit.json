@@ -54,7 +54,9 @@
       },
       "transfer": {
         "submodel": "energymod:tube",
-        "z": 90
+        "transform": { "rotation": { "z": 270 },
+          "translation": [-0.0625, 0, 0]
+        }
       },
       "connected": {
         "submodel": "energymod:tube"
@@ -65,7 +67,7 @@
       },
       "transfer": {
         "submodel": "energymod:tube",
-        "z": 90
+        "transform": { "rotation": { "z": 90 } }
 
 
       },
