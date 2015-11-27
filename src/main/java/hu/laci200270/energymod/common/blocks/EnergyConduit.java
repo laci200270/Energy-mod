@@ -1,9 +1,9 @@
-package hu.laci200270.energymod.blocks;
+package hu.laci200270.energymod.common.blocks;
 
 import cofh.api.energy.IEnergyReceiver;
 import hu.laci200270.energymod.EnergyMod;
-import hu.laci200270.energymod.enums.EnumPipeState;
-import hu.laci200270.energymod.tile.TileEnergyConduit;
+import hu.laci200270.energymod.common.enums.EnumPipeState;
+import hu.laci200270.energymod.common.tile.TileEnergyConduit;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;

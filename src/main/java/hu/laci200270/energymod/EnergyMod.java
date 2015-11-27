@@ -1,7 +1,7 @@
 package hu.laci200270.energymod;
 
-import hu.laci200270.energymod.blocks.EnergyConduit;
-import hu.laci200270.energymod.tile.TileEnergyConduit;
+import hu.laci200270.energymod.common.blocks.EnergyConduit;
+import hu.laci200270.energymod.common.tile.TileEnergyConduit;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;

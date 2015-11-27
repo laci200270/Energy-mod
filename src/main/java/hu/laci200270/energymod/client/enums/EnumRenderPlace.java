@@ -1,4 +1,4 @@
-package hu.laci200270.energymod.enums;
+package hu.laci200270.energymod.client.enums;
 
 /**
  * @author laci200270
@@ -6,6 +6,6 @@ package hu.laci200270.energymod.enums;
  */
 public enum EnumRenderPlace {
 
-    NORMAL,INVENTORY;
+    NORMAL, INVENTORY
 
 }

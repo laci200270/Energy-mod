@@ -1,4 +1,4 @@
-package hu.laci200270.energymod.enums;
+package hu.laci200270.energymod.common.enums;
 
 import net.minecraft.util.IStringSerializable;
 

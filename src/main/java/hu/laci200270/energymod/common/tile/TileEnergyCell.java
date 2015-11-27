@@ -1,7 +1,7 @@
-package hu.laci200270.energymod.tile;
+package hu.laci200270.energymod.common.tile;
 
 import cofh.api.energy.IEnergyHandler;
-import hu.laci200270.energymod.enums.EnumSideMode;
+import hu.laci200270.energymod.common.enums.EnumSideMode;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;

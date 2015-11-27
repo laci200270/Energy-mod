@@ -1,6 +1,6 @@
-package hu.laci200270.energymod.blocks;
+package hu.laci200270.energymod.common.blocks;
 
-import hu.laci200270.energymod.tile.TileEnergyCell;
+import hu.laci200270.energymod.common.tile.TileEnergyCell;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

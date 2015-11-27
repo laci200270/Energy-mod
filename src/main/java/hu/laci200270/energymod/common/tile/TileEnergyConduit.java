@@ -1,4 +1,4 @@
-package hu.laci200270.energymod.tile;
+package hu.laci200270.energymod.common.tile;
 
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
