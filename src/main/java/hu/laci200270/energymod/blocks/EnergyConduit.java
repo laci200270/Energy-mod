@@ -22,7 +22,6 @@ import java.util.ArrayList;
  * @date 2015.08.16.
  */
 public class EnergyConduit extends Block {
-    //public static ResourceLocation resourceLocation = new ModelResourceLocation("energymod:eCondouit");
 
     public static PropertyEnum EAST = PropertyEnum.create("east", EnumPipeState.class);
 
