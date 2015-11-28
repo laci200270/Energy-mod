@@ -1,7 +1,11 @@
 package hu.laci200270.energymod;
 
 import hu.laci200270.energymod.client.CreativeTabEnergyMod;
+import hu.laci200270.energymod.client.gui.GuiEnergyCell;
 import hu.laci200270.energymod.common.blocks.EnergyConduit;
+import hu.laci200270.energymod.common.gui.ContainerEnergyCell;
+import hu.laci200270.energymod.common.gui.GuiHandler;
+import hu.laci200270.energymod.common.gui.GuiRegistry;
 import hu.laci200270.energymod.common.tile.TileEnergyCell;
 import hu.laci200270.energymod.common.tile.TileEnergyConduit;
 import hu.laci200270.energymod.proxys.CommonProxy;
@@ -22,6 +26,9 @@ public class EnergyMod {
     public static final EnergyConduit conduitEnergy=new EnergyConduit();
     public static final EnergyConduit energyCell = new EnergyConduit();
     public static final CreativeTabs creativeTabs = new CreativeTabEnergyMod();
+    public static final GuiHandler guiHandler=new GuiHandler();
+    public static final GuiRegistry guiRegistry=new GuiRegistry();
+
     @Mod.Instance(value = "energymod")
     public static EnergyMod instance;
 
@@ -44,7 +51,7 @@ public class EnergyMod {
         GameRegistry.registerTileEntity(TileEnergyCell.class, "teCell");
 
         proxy.preInit();
-
+        guiRegistry.registerElement("eCell", ContainerEnergyCell.class, GuiEnergyCell.class);
     }
 
 }
