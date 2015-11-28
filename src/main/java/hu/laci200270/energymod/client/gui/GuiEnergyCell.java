@@ -1,7 +1,9 @@
 package hu.laci200270.energymod.client.gui;
 
+import hu.laci200270.energymod.EnergyMod;
 import hu.laci200270.energymod.common.gui.ContainerEnergyCell;
 import hu.laci200270.energymod.common.tile.TileEnergyCell;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
@@ -16,11 +18,11 @@ public class GuiEnergyCell extends GuiContainer {
         super(inventorySlotsIn);
         ContainerEnergyCell cont= (ContainerEnergyCell) inventorySlotsIn;
         TileEnergyCell cell=cont.tile;
-
+        EnergyMod.logger.info("GUI open!");
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        drawGradientRect(5,5,10,10,120,11);
+        drawString(Minecraft.getMinecraft().fontRendererObj,"String",mouseX,mouseY,mouseX*mouseY);
     }
 }

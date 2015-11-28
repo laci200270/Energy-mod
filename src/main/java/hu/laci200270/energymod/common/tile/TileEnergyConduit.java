@@ -79,9 +79,9 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler,IUpd
                         condouit.receiveEnergy(facing.getOpposite(),received,false);
                     }
                     else{
-                        int received=receiver.receiveEnergy(facing.getOpposite(),calculateMaxOutPut(200),true);
+                       /* int received=receiver.receiveEnergy(facing.getOpposite(),calculateMaxOutPut(200),true);
                         this.energyAmount=this.energyAmount-received;
-                        receiver.receiveEnergy(facing.getOpposite(),received,false);
+                        receiver.receiveEnergy(facing.getOpposite(),received,false);*/
                     }
                 }
             }

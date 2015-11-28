@@ -11,10 +11,12 @@ import net.minecraft.tileentity.TileEntity;
 public class ContainerEnergyCell extends Container {
 
 
+    private final EntityPlayer player;
     public TileEnergyCell  tile;
 
-    public ContainerEnergyCell(TileEntity tile){
+    public ContainerEnergyCell(TileEntity tile,EntityPlayer player){
         this.tile= (TileEnergyCell) tile;
+        this.player=player;
     }
 
     @Override

@@ -31,8 +31,10 @@ public class EnergyCell extends Block {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ){
+        System.out.println("Called activated");
         try {
-            EnergyMod.guiRegistry.openGui("eCell",playerIn,pos,worldIn);
+            EnergyMod.guiRegistry.openGui("eCell", playerIn, pos, worldIn);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

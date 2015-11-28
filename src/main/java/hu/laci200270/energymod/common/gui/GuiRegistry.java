@@ -57,6 +57,7 @@ public class GuiRegistry {
             return null;
         } catch (InvocationTargetException e) {
             e.printStackTrace();
+            EnergyMod.logger.error(e.getTargetException().getMessage());
             return null;
         } catch (InstantiationException e) {
             e.printStackTrace();
