@@ -45,7 +45,7 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, IUpdat
     @Override
     public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
         int received = 0;
-        if (sides.get(facing)!=null&&sides.get(facing).equals(EnumSideMode.INPUT)) {
+        if (sides.get(facing).equals(EnumSideMode.INPUT)) {
             if (maxReceive + energyAmount > maxEnergy) {
                 received = energyAmount + maxReceive - maxReceive;
             } else
