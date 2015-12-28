@@ -80,3 +80,8 @@ processResources
         exclude 'mcmod.info'
     }
 }
+idea{
+
+idea.module.inheritOutputDirs = true
+
+}
