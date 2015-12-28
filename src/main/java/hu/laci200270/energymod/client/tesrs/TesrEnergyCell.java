@@ -1,6 +1,7 @@
 package hu.laci200270.energymod.client.tesrs;
 
 import com.sun.javafx.geom.Quat4f;
+import hu.laci200270.energymod.client.ClientHelper;
 import javafx.scene.effect.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -32,12 +33,13 @@ public class TesrEnergyCell extends TileEntitySpecialRenderer {
 
 
 
+        GL11.glPushMatrix();
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("miencraft:diamond_block"));
         Tessellator.getInstance().getWorldRenderer().startDrawing(GL11.GL_TRIANGLE_FAN);
         GL11.glTranslated(x+0.5F, y + 2F, z+0.5F);
         Tessellator.getInstance().getWorldRenderer().setColorRGBA(255, 255, 0, 128);
-
+        new ClientHelper().setRotation(te);
         int NUM_PIZZA_SLICES = 200;
         for (int i = 0; i <= NUM_PIZZA_SLICES; i++) { //NUM_PIZZA_SLICES decides how round the circle looks.
             double SUBDIVISIONS = 180;

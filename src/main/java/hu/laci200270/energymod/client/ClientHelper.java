@@ -25,19 +25,8 @@ public class ClientHelper {
         Vector3d lookVec = new Vector3d(playerLoc.getX() - teLoc.getX(), playerLoc.getY() - teLoc.getY(), playerLoc.getZ() - teLoc.getZ());
         double angleYaw = Math.atan2(lookVec.getZ(), lookVec.getX()) - Math.PI/2d;
         double anglePitch = Math.atan2(lookVec.getY(), Math.sqrt(lookVec.getX() * lookVec.getX() + lookVec.getZ() * lookVec.getZ()));
-        AxisAngle4d yaw = new AxisAngle4d(0, 1, 0, -angleYaw);
-        AxisAngle4d pitch = new AxisAngle4d(1, 0, 0, -anglePitch);
-        Quat4f rot = new Quat4f(0, 0, 0, 1);
-        Quat4f yawQuat = new Quat4f();
-        Quat4f pitchQuat = new Quat4f();
-        yawQuat.set(yaw);
-        rot.mul(yawQuat);
-        pitchQuat.set(pitch);
-        rot.mul(pitchQuat);
-        Matrix4f matrix = new Matrix4f();
-        matrix.setIdentity();
-        matrix.setRotation(rot);
 
-        GL11.glRotated(angleYaw, 0, 1, 0);
+
+        GL11.glRotated(angleYaw, 1, 0, 0);
     }
 }
