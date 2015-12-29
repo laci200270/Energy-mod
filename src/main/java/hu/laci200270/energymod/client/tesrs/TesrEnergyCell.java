@@ -45,19 +45,18 @@ public class TesrEnergyCell extends TileEntitySpecialRenderer {
         ClientHelper.setRotation(te);
         GlStateManager.rotate(330,1,0,0);
         GlStateManager.scale(0.25F,0.25F,0.25F);
-        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
-        GL11.glVertex2f(0, 0);
+
 
         double angle=Math.toRadians(180);
         double SUBDIVISIONS=0.017;
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("energymod:block/gradient"));
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("energymod:textures/block/gradient"));
         Tessellator tessellator=Tessellator.getInstance();
         WorldRenderer worldRenderer=tessellator.getWorldRenderer();
         for(double theta = 0; theta < angle; theta += SUBDIVISIONS){
 
             worldRenderer.addVertexWithUV((float) Math.cos(theta), (float) Math.sin(theta), 0, 0, 0);
         }
-        GL11.glEnd();
+
         Tessellator.getInstance().draw();
 
         GL11.glPopMatrix();
