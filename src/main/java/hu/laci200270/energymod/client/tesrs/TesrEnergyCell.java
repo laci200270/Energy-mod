@@ -6,6 +6,8 @@ import javafx.scene.effect.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,15 +39,24 @@ public class TesrEnergyCell extends TileEntitySpecialRenderer {
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("miencraft:diamond_block"));
         Tessellator.getInstance().getWorldRenderer().startDrawing(GL11.GL_TRIANGLE_FAN);
-        GL11.glTranslated(x+0.5F, y + 2F, z+0.5F);
+        GL11.glTranslated(x+0.5F, y + 1.25F, z+0.5F);
         Tessellator.getInstance().getWorldRenderer().setColorRGBA(255, 255, 0, 128);
         ClientHelper.setRotation(te);
-        int NUM_PIZZA_SLICES = 200;
-        for (int i = 0; i <= NUM_PIZZA_SLICES; i++) { //NUM_PIZZA_SLICES decides how round the circle looks.
-            double SUBDIVISIONS = 180;
-            double angle = Math.PI * 2 * i / SUBDIVISIONS;
-            Tessellator.getInstance().getWorldRenderer().addVertex((float) Math.cos(angle), (float) Math.sin(angle), 0);
+        GlStateManager.rotate(330,1,0,0);
+        GlStateManager.scale(0.25F,0.25F,0.25F);
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minecraft:blocks/dirt"));
+        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
+        GL11.glVertex2f(0, 0);
+
+        double angle=Math.toRadians(180);
+        double SUBDIVISIONS=0.00001;
+        Tessellator tessellator=Tessellator.getInstance();
+        WorldRenderer worldRenderer=tessellator.getWorldRenderer();
+        for(double theta = 0; theta < angle; theta += SUBDIVISIONS){
+            
+            GL11.glVertex2f((float)Math.cos(theta), (float)Math.sin(theta));
         }
+        GL11.glEnd();
 
         Tessellator.getInstance().draw();
 
