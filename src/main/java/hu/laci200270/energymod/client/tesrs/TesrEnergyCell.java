@@ -52,6 +52,7 @@ public class TesrEnergyCell extends TileEntitySpecialRenderer {
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("energymod:textures/block/gradient.png"));
         Tessellator tessellator=Tessellator.getInstance();
         WorldRenderer worldRenderer=tessellator.getWorldRenderer();
+        worldRenderer.addVertexWithUV(0,0,0,1,1);
         for(double theta = 0; theta < angle; theta += SUBDIVISIONS){
 
             worldRenderer.addVertexWithUV((float) Math.cos(theta), (float) Math.sin(theta), 0, 0, 0);
