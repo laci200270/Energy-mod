@@ -4,16 +4,16 @@ import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 
 /**
  * @author laci200270
  * @date 2015.08.16.
  */
-public class TileEnergyConduit extends TileEntity implements IEnergyHandler,IUpdatePlayerListBox{
+public class TileEnergyConduit extends TileEntity implements IEnergyHandler,ITickable{
 
     public int energyAmount=0;
     public int maxEnergy = 1200;

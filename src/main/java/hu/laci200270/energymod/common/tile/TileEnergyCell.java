@@ -3,16 +3,16 @@ package hu.laci200270.energymod.common.tile;
 import cofh.api.energy.IEnergyHandler;
 import hu.laci200270.energymod.common.enums.EnumSideMode;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 
 import java.util.HashMap;
 
 /**
  * Created by laci200270 on 2015.11.22. at 16:Energy-mod .
  */
-public class TileEnergyCell extends TileEntity implements IEnergyHandler, IUpdatePlayerListBox {
+public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITickable {
 
     HashMap<EnumFacing, EnumSideMode> sides = new HashMap<EnumFacing, EnumSideMode>();
     private int energyAmount = 0;
