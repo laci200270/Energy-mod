@@ -1,24 +1,14 @@
 package hu.laci200270.energymod.client.tesrs;
 
-import com.sun.javafx.geom.Quat4f;
 import hu.laci200270.energymod.client.ClientHelper;
-import javafx.scene.effect.Light;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Matrix4f;
-
-import javax.vecmath.AxisAngle4d;
-import javax.vecmath.Vector3d;
 
 
 /**
@@ -49,7 +39,14 @@ public class TesrEnergyCell extends TileEntitySpecialRenderer {
 
         double angle=Math.toRadians(180);
         double SUBDIVISIONS=0.017;
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableAlpha();
+        GlStateManager.disableLighting();
+        GlStateManager.color(1, 1, 1, 1);
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("energymod:textures/block/gradient.png"));
+
         Tessellator tessellator=Tessellator.getInstance();
         WorldRenderer worldRenderer=tessellator.getWorldRenderer();
         worldRenderer.addVertexWithUV(0,0,0,1,1);
@@ -59,7 +56,7 @@ public class TesrEnergyCell extends TileEntitySpecialRenderer {
         }
 
         Tessellator.getInstance().draw();
-
+        GlStateManager.disableBlend();
         GlStateManager.popMatrix();
     }
 
