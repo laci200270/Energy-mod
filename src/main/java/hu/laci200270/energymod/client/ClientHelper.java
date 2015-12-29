@@ -1,22 +1,19 @@
 package hu.laci200270.energymod.client;
 
-import hu.laci200270.energymod.EnergyMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.client.model.TRSRTransformation;
-import org.lwjgl.opengl.GL11;
 
-import javax.vecmath.AxisAngle4d;
-import javax.vecmath.Matrix4f;
-import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3d;
 
 /**
  * Created by Laci on 2015. 12. 28..
  */
 public class ClientHelper {
+
+    int gradientId=0;
+
     public static void setRotation(TileEntity tileEntity){
         Vector3d teLoc = new Vector3d(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ());
         EntityPlayer player = Minecraft.getMinecraft().thePlayer;
