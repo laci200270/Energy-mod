@@ -50,7 +50,7 @@ public class TesrEnergyCell extends TileEntitySpecialRenderer {
 
         double angle=Math.toRadians(180);
         double SUBDIVISIONS=0.017;
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("energymod:gradient"));
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("energymod:block/gradient"));
         Tessellator tessellator=Tessellator.getInstance();
         WorldRenderer worldRenderer=tessellator.getWorldRenderer();
         for(double theta = 0; theta < angle; theta += SUBDIVISIONS){
