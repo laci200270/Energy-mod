@@ -24,4 +24,19 @@ public class EnergyCell extends Block {
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileEnergyCell();
     }
+
+    @Override
+    public int getRenderType() {
+        return super.getRenderType();
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube() {
+        return false;
+    }
 }
