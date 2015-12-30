@@ -68,7 +68,7 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
                 received = maxEnergy - variable2;
             }
             if (!simulate)
-                this.energyAmount += received;
+                this.energyAmount=energyAmount+received;
         }
         return received;
     }
