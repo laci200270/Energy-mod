@@ -1,6 +1,7 @@
 package hu.laci200270.energymod.common.tile;
 
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 import hu.laci200270.energymod.EnergyMod;
 import net.minecraft.nbt.NBTTagCompound;
@@ -72,18 +73,37 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
         if (!worldObj.isRemote) {
 
 
+            Set<BlockPos> connectedPipes = scanForPipes(getPos(), worldObj, new HashSet<BlockPos>());
+            Set<TransferObject> receivers = findAllReceivers(worldObj, connectedPipes, new HashSet<TransferObject>());
+            for (TransferObject tobject : receivers) {
+                int maxPullableEnergy = 0;
+                Set<EnumFacing> neighbourEnergyProviders = findNeighbourProviders(worldObj, pos);
+                for (EnumFacing facing : neighbourEnergyProviders) {
+                    BlockPos targetPos = pos.offset(facing);
+                    IEnergyProvider provider = (IEnergyProvider) worldObj.getTileEntity(targetPos);
+                    maxPullableEnergy += provider.extractEnergy(facing.getOpposite(), 200, true);
+                }
+                int inserted = tobject.receiver.receiveEnergy(tobject.where, maxPullableEnergy, true);
+                int remain = inserted;
+                while (remain != 0) {
+                    for (EnumFacing facing : neighbourEnergyProviders) {
+                        if (remain > 0) {
+                            BlockPos targetPos = pos.offset(facing);
+                            IEnergyProvider provider = (IEnergyProvider) worldObj.getTileEntity(targetPos);
+                            int pulled = provider.extractEnergy(facing.getOpposite(), 1, true);
+                            if (pulled == 1) {
+                                provider.extractEnergy(facing.getOpposite(), 1, false);
+                                remain--;
+                            }
+                        }
 
-
-                    Set<BlockPos> connectedPipes = scanForPipes(getPos(), worldObj, new HashSet<BlockPos>());
-                    Set<TransferObject> receivers = findAllReceivers(worldObj, connectedPipes, new HashSet<TransferObject>());
-                    for (TransferObject tobject : receivers) {
-                        int insterted = tobject.receiver.receiveEnergy(tobject.where, calculateMaxOutPut(200), true);
-                        this.energyAmount = this.energyAmount - insterted;
-                        tobject.receiver.receiveEnergy(tobject.where, insterted, false);
                     }
-
                 }
 
+                tobject.receiver.receiveEnergy(tobject.where, inserted, false);
+            }
+
+        }
 
 
     }
@@ -106,8 +126,7 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
         return preScanned;
     }
 
-    Set<TransferObject> findAllReceivers(World
-                                                 world, Set<BlockPos> positions, Set<TransferObject> previousResults) {
+    Set<TransferObject> findAllReceivers(World world, Set<BlockPos> positions, Set<TransferObject> previousResults) {
         for (BlockPos currentPos : positions) {
             for (EnumFacing offset : EnumFacing.VALUES) {
                 BlockPos offsetPos = currentPos.offset(offset);
@@ -119,6 +138,19 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
 
         }
         return previousResults;
+    }
+
+    Set<EnumFacing> findNeighbourProviders(World world, BlockPos currentPos) {
+        Set<EnumFacing> returanble = new HashSet<EnumFacing>();
+
+        for (EnumFacing currentOffset : EnumFacing.VALUES) {
+            BlockPos offsetPos = currentPos.offset(currentOffset);
+            if (!(world.getBlockState(offsetPos).getBlock() == EnergyMod.conduitEnergy) && world.getTileEntity(offsetPos) != null & world.getTileEntity(offsetPos) instanceof IEnergyProvider) {
+                returanble.add(currentOffset);
+            }
+        }
+
+        return returanble;
     }
 
     private class TransferObject {

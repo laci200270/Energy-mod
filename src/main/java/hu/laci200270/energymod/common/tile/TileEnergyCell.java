@@ -3,6 +3,9 @@ package hu.laci200270.energymod.common.tile;
 import cofh.api.energy.IEnergyHandler;
 import hu.laci200270.energymod.common.enums.EnumSideMode;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -44,6 +47,19 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
     }
 
     @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound nbtTagCompound=new NBTTagCompound();
+        writeToNBT(nbtTagCompound);
+        return new S35PacketUpdateTileEntity(getPos(),1,nbtTagCompound);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        super.onDataPacket(net, pkt);
+        readFromNBT(pkt.getNbtCompound());
+    }
+
+    @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setInteger("down", sides.get(EnumFacing.DOWN).ordinal());
@@ -58,19 +74,19 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
 
     @Override
     public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
-        int received = 0;
+        int energyReceived = 0;
         if (sides.get(facing) == EnumSideMode.INPUT) {
-            if (maxReceive + energyAmount < maxEnergy) {
-                received = maxReceive;
-            } else {
-                int virtualoverflow = energyAmount + maxReceive;
-                int variable2 = virtualoverflow - maxReceive; //I had no better idea :(
-                received = maxEnergy - variable2;
+            energyReceived = Math.min(maxEnergy - maxReceive, Math.min(200, maxReceive));
+
+            if (!simulate) {
+                energyAmount += energyReceived;
             }
-            if (!simulate)
-                this.energyAmount=energyAmount+received;
+
+            worldObj.markBlockForUpdate(pos);
+            markDirty();
         }
-        return received;
+
+        return energyReceived;
     }
 
     @Override
@@ -79,6 +95,8 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
         if (!simulate) {
             energyAmount = energyAmount - extracted;
         }
+        worldObj.markBlockForUpdate(pos);
+        markDirty();
         return extracted;
     }
 
@@ -110,7 +128,6 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
         } else
             return energyAmount;
     }
-
 
 
 }
