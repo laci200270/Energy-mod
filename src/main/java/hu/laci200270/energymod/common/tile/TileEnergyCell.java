@@ -39,8 +39,8 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
         sides.put(EnumFacing.SOUTH, EnumSideMode.values()[compound.getInteger("south")]);
         energyAmount = compound.getInteger("energy");
 
-        if(energyAmount>maxEnergy)
-            energyAmount=maxEnergy;
+        if (energyAmount > maxEnergy)
+            energyAmount = maxEnergy;
     }
 
     @Override
@@ -63,11 +63,9 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
             if (maxReceive + energyAmount < maxEnergy) {
                 received = maxReceive;
             } else {
-                int virtualoverflow=energyAmount+maxReceive;
-                int variable2=virtualoverflow-maxReceive; //I had no better idea :(
-                received=maxEnergy-variable2;
-
-
+                int virtualoverflow = energyAmount + maxReceive;
+                int variable2 = virtualoverflow - maxReceive; //I had no better idea :(
+                received = maxEnergy - variable2;
             }
             if (!simulate)
                 this.energyAmount += received;
@@ -112,6 +110,7 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
         } else
             return energyAmount;
     }
+
 
 
 }

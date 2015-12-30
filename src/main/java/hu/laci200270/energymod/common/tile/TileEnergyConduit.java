@@ -3,12 +3,17 @@ package hu.laci200270.energymod.common.tile;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
+import hu.laci200270.energymod.EnergyMod;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.world.World;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author laci200270
@@ -66,32 +71,31 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
 
     @Override
     public void update() {
-        for (EnumFacing facing : EnumFacing.VALUES) {
-            BlockPos targetpos = getPos().offset(facing);
-            IBlockState state = worldObj.getBlockState(targetpos);
-            if (state.getBlock().hasTileEntity(state)) {
-                TileEntity targeTE = worldObj.getTileEntity(targetpos);
-                if (targeTE instanceof IEnergyReceiver) {
-                    IEnergyReceiver receiver = (IEnergyReceiver) targeTE;
-                    if (targeTE instanceof TileEnergyConduit) {
-                        TileEnergyConduit condouit = (TileEnergyConduit) targeTE;
-                        int received = condouit.receiveEnergy(facing.getOpposite(), this.energyAmount, true);
-                        this.energyAmount = this.energyAmount - received;
-                        condouit.receiveEnergy(facing.getOpposite(), received, false);
-                    } else {
-                        int received = receiver.receiveEnergy(facing.getOpposite(), calculateMaxOutPut(200), true);
-                        this.energyAmount = this.energyAmount - received;
-                        receiver.receiveEnergy(facing.getOpposite(), received, false);
+        if (!worldObj.isRemote) {
+            for (EnumFacing facing : EnumFacing.VALUES) {
+                BlockPos targetpos = getPos().offset(facing);
+                IBlockState state = worldObj.getBlockState(targetpos);
+                if (state.getBlock().hasTileEntity(state)) {
+                    TileEntity targeTE = worldObj.getTileEntity(targetpos);
+                    if (targeTE instanceof IEnergyReceiver) {
+                        IEnergyReceiver receiver = (IEnergyReceiver) targeTE;
+                        if (targeTE instanceof IEnergyProvider) {
+                            IEnergyProvider provider = (IEnergyProvider) targeTE;
+
+
+                            int received = provider.extractEnergy(facing.getOpposite(), calculateMaxOutPut(2000), true);
+                            this.energyAmount = this.energyAmount + received;
+                            provider.extractEnergy(facing.getOpposite(), received, false);
+
+                        }
+                        Set<BlockPos> connectedPipes = scanForPipes(getPos(), worldObj, new HashSet<BlockPos>());
+                        Set<TransferObject> receivers = findAllReceivers(worldObj, connectedPipes, new HashSet<TransferObject>());
+                        for (TransferObject tobject : receivers) {
+                            int insterted = tobject.receiver.receiveEnergy(tobject.where, calculateMaxOutPut(200), true);
+                            this.energyAmount = this.energyAmount - insterted;
+                            tobject.receiver.receiveEnergy(tobject.where, insterted, false);
+                        }
                     }
-                }
-                if (targeTE instanceof IEnergyProvider) {
-                    IEnergyProvider provider = (IEnergyProvider) targeTE;
-
-
-                    int received = provider.extractEnergy(facing.getOpposite(), calculateMaxOutPut(200), true);
-                    this.energyAmount = this.energyAmount + received;
-                    provider.extractEnergy(facing.getOpposite(), received, false);
-
                 }
             }
         }
@@ -102,5 +106,40 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
             return rate;
         } else
             return rate;
+    }
+
+    Set<BlockPos> scanForPipes(BlockPos startPos, World world, Set<BlockPos> preScanned) {
+        for (EnumFacing currentFacing : EnumFacing.VALUES) {
+            BlockPos pos = startPos.offset(currentFacing);
+            if (world.getBlockState(pos).getBlock() == EnergyMod.conduitEnergy && !(preScanned.contains(pos))) {
+                preScanned.add(pos);
+                scanForPipes(pos, world, preScanned);
+            }
+        }
+        return preScanned;
+    }
+
+    Set<TransferObject> findAllReceivers(World world, Set<BlockPos> positions, Set<TransferObject> previousResults) {
+        for (BlockPos currentPos : positions) {
+            for (EnumFacing offset : EnumFacing.VALUES) {
+                BlockPos offsetPos = currentPos.offset(offset);
+                if (!(world.getBlockState(offsetPos).getBlock() == EnergyMod.conduitEnergy) && world.getTileEntity(pos) != null & world.getTileEntity(pos) instanceof IEnergyHandler && !(previousResults.contains((IEnergyHandler) world.getTileEntity(offsetPos)))) {
+                    previousResults.add(new TransferObject(offset.getOpposite(), (IEnergyReceiver) world.getTileEntity(offsetPos)));
+                }
+
+            }
+
+        }
+        return previousResults;
+    }
+
+    private class TransferObject {
+        public EnumFacing where;
+        public IEnergyReceiver receiver;
+
+        public TransferObject(EnumFacing where, IEnergyReceiver receiver) {
+            this.where = where;
+            this.receiver = receiver;
+        }
     }
 }
