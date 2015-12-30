@@ -4,7 +4,11 @@ import hu.laci200270.energymod.common.tile.TileEnergyCell;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 /**
@@ -13,6 +17,17 @@ import net.minecraft.world.World;
 public class EnergyCell extends Block {
     public EnergyCell() {
         super(Material.circuits);
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
+        TileEnergyCell eCell = (TileEnergyCell) worldIn.getTileEntity(pos);
+        int received = eCell.receiveEnergy(EnumFacing.UP, 2000, false);
+        playerIn.addChatComponentMessage(new ChatComponentText(String.format("Player %s right clicked to block and added %d energy to cell at %s", playerIn.getName(), received, pos.toString())));
+        if (playerIn.isSneaking())
+            playerIn.addChatComponentMessage(new ChatComponentText(String.format("The current energy level is %d", eCell.getEnergyStored(EnumFacing.UP))));
+
+        return true;
     }
 
     @Override

@@ -18,6 +18,16 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
     private int energyAmount = 0;
     private int maxEnergy = 20000;
 
+
+    public TileEnergyCell() {
+        for (EnumFacing current : EnumFacing.HORIZONTALS) {
+            sides.put(current, EnumSideMode.INPUT);
+        }
+        sides.put(EnumFacing.DOWN, EnumSideMode.OUTPUT);
+        sides.put(EnumFacing.UP, EnumSideMode.INPUT);
+    }
+
+
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
@@ -28,29 +38,38 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
         sides.put(EnumFacing.NORTH, EnumSideMode.values()[compound.getInteger("north")]);
         sides.put(EnumFacing.SOUTH, EnumSideMode.values()[compound.getInteger("south")]);
         energyAmount = compound.getInteger("energy");
+
+        if(energyAmount>maxEnergy)
+            energyAmount=maxEnergy;
     }
 
     @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setInteger("down", sides.get("down").ordinal());
-        compound.setInteger("up", sides.get("up").ordinal());
-        compound.setInteger("east", sides.get("east").ordinal());
-        compound.setInteger("west", sides.get("west").ordinal());
-        compound.setInteger("north", sides.get("north").ordinal());
-        compound.setInteger("south", sides.get("south").ordinal());
+        compound.setInteger("down", sides.get(EnumFacing.DOWN).ordinal());
+        compound.setInteger("up", sides.get(EnumFacing.UP).ordinal());
+        compound.setInteger("east", sides.get(EnumFacing.EAST).ordinal());
+        compound.setInteger("west", sides.get(EnumFacing.WEST).ordinal());
+        compound.setInteger("north", sides.get(EnumFacing.NORTH).ordinal());
+        compound.setInteger("south", sides.get(EnumFacing.SOUTH).ordinal());
         compound.setInteger("energy", energyAmount);
+
     }
 
     @Override
     public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
         int received = 0;
-        if (sides.get(facing).equals(EnumSideMode.INPUT)) {
-            if (maxReceive + energyAmount > maxEnergy) {
-                received = energyAmount + maxReceive - maxReceive;
-            } else
-                received = energyAmount;
-            if (simulate)
+        if (sides.get(facing) == EnumSideMode.INPUT) {
+            if (maxReceive + energyAmount < maxEnergy) {
+                received = maxReceive;
+            } else {
+                int virtualoverflow=energyAmount+maxReceive;
+                int variable2=virtualoverflow-maxReceive; //I had no better idea :(
+                received=maxEnergy-variable2;
+
+
+            }
+            if (!simulate)
                 this.energyAmount += received;
         }
         return received;
@@ -58,7 +77,11 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
 
     @Override
     public int extractEnergy(EnumFacing facing, int maxExtract, boolean simulate) {
-        return 0;
+        int extracted = calculateMaxOutPut(maxExtract);
+        if (!simulate) {
+            energyAmount = energyAmount - extracted;
+        }
+        return extracted;
     }
 
     @Override
@@ -82,4 +105,13 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
     public void update() {
 
     }
+
+    private int calculateMaxOutPut(int rate) {
+        if (this.energyAmount > rate) {
+            return rate;
+        } else
+            return energyAmount;
+    }
+
+
 }

@@ -32,6 +32,8 @@ public class EnergyStorage implements IEnergyStorage {
 		this.maxExtract = maxExtract;
 	}
 
+
+
 	public EnergyStorage readFromNBT(NBTTagCompound nbt) {
 
 		this.energy = nbt.getInteger("Energy");

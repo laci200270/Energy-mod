@@ -8,13 +8,11 @@ package hu.laci200270.energymod.common.enums;
 import net.minecraft.util.IStringSerializable;
 
 /**
- *
  * CONNECTED when it connected to a machine or inventory
- *
+ * <p/>
  * TRANSFER when its next to a pipe
- *
+ * <p/>
  * NONE if nothing
- *
  */
 public enum EnumPipeState implements IStringSerializable {
 

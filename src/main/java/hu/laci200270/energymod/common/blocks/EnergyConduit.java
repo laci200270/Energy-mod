@@ -32,7 +32,7 @@ public class EnergyConduit extends Block {
     public static PropertyEnum DOWN = PropertyEnum.create("down", EnumPipeState.class);
 
 
-    public EnergyConduit(){
+    public EnergyConduit() {
         super(Material.iron);
 
 
@@ -91,13 +91,12 @@ public class EnergyConduit extends Block {
     }
 
     private EnumPipeState generateState(EnumFacing facing, IBlockAccess world, BlockPos pos) {
-        if(world.getBlockState(pos.offset(facing)).getBlock()== EnergyMod.conduitEnergy){
+        if (world.getBlockState(pos.offset(facing)).getBlock() == EnergyMod.conduitEnergy) {
             return EnumPipeState.TRANSFER;
         }
-        if(world.getTileEntity(pos.offset(facing))!=null&&world.getTileEntity(pos.offset(facing)) instanceof IEnergyReceiver){
+        if (world.getTileEntity(pos.offset(facing)) != null && world.getTileEntity(pos.offset(facing)) instanceof IEnergyReceiver) {
             return EnumPipeState.CONNECTED;
-        }
-        else
+        } else
             return EnumPipeState.NONE;
     }
 
