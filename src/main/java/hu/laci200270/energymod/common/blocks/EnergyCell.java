@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 public class EnergyCell extends Block {
     public EnergyCell() {
         super(Material.circuits);
-        setUnlocalizedName("eCell");
     }
 
     @Override
@@ -44,7 +43,7 @@ public class EnergyCell extends Block {
 
     @Override
     public int getRenderType() {
-        return -1;
+        return super.getRenderType();
     }
 
     @Override
