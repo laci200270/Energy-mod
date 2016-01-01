@@ -74,26 +74,31 @@ public class TileEnergyCell extends TileEntity implements IEnergyHandler, ITicka
 
     @Override
     public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
-        int energyReceived = 0;
+
+        int received = 0;
         if (sides.get(facing) == EnumSideMode.INPUT) {
-            energyReceived = Math.min(maxEnergy - maxReceive, Math.min(200, maxReceive));
-
-            if (!simulate) {
-                energyAmount += energyReceived;
+            if (maxReceive + energyAmount < maxEnergy) {
+                received = maxReceive;
+            } else {
+                int virtualOverflow = energyAmount + maxReceive;
+                int variable2 = virtualOverflow - maxReceive; //I had no better idea for variable name :(
+                received = maxEnergy - variable2;
             }
-
+            if (!simulate)
+                this.energyAmount += received;
             worldObj.markBlockForUpdate(pos);
             markDirty();
         }
+        return received;
 
-        return energyReceived;
+
     }
 
     @Override
     public int extractEnergy(EnumFacing facing, int maxExtract, boolean simulate) {
         int extracted = calculateMaxOutPut(maxExtract);
         if (!simulate) {
-            energyAmount = energyAmount - extracted;
+            energyAmount -=extracted;
         }
         worldObj.markBlockForUpdate(pos);
         markDirty();

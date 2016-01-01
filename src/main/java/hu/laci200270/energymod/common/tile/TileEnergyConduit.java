@@ -74,6 +74,7 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
 
 
             Set<BlockPos> connectedPipes = scanForPipes(getPos(), worldObj, new HashSet<BlockPos>());
+            connectedPipes.add(getPos());
             Set<TransferObject> receivers = findAllReceivers(worldObj, connectedPipes, new HashSet<TransferObject>());
             for (TransferObject tobject : receivers) {
                 int maxPullableEnergy = 0;
@@ -85,6 +86,7 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
                 }
                 int inserted = tobject.receiver.receiveEnergy(tobject.where, maxPullableEnergy, true);
                 int remain = inserted;
+                EnergyMod.logger.info(String.format("Remain energy is %d",remain));
                 while (remain != 0) {
                     for (EnumFacing facing : neighbourEnergyProviders) {
                         if (remain > 0) {
@@ -130,7 +132,7 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
         for (BlockPos currentPos : positions) {
             for (EnumFacing offset : EnumFacing.VALUES) {
                 BlockPos offsetPos = currentPos.offset(offset);
-                if (!(world.getBlockState(offsetPos).getBlock() == EnergyMod.conduitEnergy) && world.getTileEntity(offsetPos) != null & world.getTileEntity(offsetPos) instanceof IEnergyHandler && !(previousResults.contains((IEnergyHandler) world.getTileEntity(offsetPos)))) {
+                if (!(world.getBlockState(offsetPos).getBlock() == EnergyMod.conduitEnergy) && world.getTileEntity(offsetPos) != null & world.getTileEntity(offsetPos) instanceof IEnergyHandler && !(previousResults.contains((IEnergyHandler) world.getTileEntity(offsetPos)))&&((IEnergyHandler) world.getTileEntity(offsetPos)).receiveEnergy(offset.getOpposite(),1,true)==1) {
                     previousResults.add(new TransferObject(offset.getOpposite(), (IEnergyReceiver) world.getTileEntity(offsetPos)));
                 }
 
