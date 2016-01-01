@@ -86,7 +86,7 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
                 }
                 int inserted = tobject.receiver.receiveEnergy(tobject.where, maxPullableEnergy, true);
                 int remain = inserted;
-                EnergyMod.logger.info(String.format("Remain energy is %d",remain));
+                //EnergyMod.logger.info(String.format("Remain energy is %d",remain));
                 while (remain != 0) {
                     for (EnumFacing facing : neighbourEnergyProviders) {
                         if (remain > 0) {
