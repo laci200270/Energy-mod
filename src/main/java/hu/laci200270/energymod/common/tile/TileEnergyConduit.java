@@ -16,7 +16,7 @@ import java.util.Set;
 
 /**
  * @author laci200270
- * @date 2015.08.16.
+ * @since 2015.08.16.
  */
 public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITickable {
 
@@ -38,7 +38,7 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
 
     @Override
     public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
-        int received = 0;
+        int received;
         if (maxReceive + energyAmount > maxEnergy) {
             received = energyAmount + maxReceive - maxReceive;
         } else
@@ -109,7 +109,7 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
 
 
     }
-
+    @SuppressWarnings(value = "unused")
     private int calculateMaxOutPut(int rate) {
         if (this.energyAmount > rate) {
             return rate;
@@ -128,11 +128,13 @@ public class TileEnergyConduit extends TileEntity implements IEnergyHandler, ITi
         return preScanned;
     }
 
+
+    @SuppressWarnings(value= "SuspiciousMethodCalls")
     Set<TransferObject> findAllReceivers(World world, Set<BlockPos> positions, Set<TransferObject> previousResults) {
         for (BlockPos currentPos : positions) {
             for (EnumFacing offset : EnumFacing.VALUES) {
                 BlockPos offsetPos = currentPos.offset(offset);
-                if (!(world.getBlockState(offsetPos).getBlock() == EnergyMod.conduitEnergy) && world.getTileEntity(offsetPos) != null & world.getTileEntity(offsetPos) instanceof IEnergyHandler && !(previousResults.contains((IEnergyHandler) world.getTileEntity(offsetPos)))&&((IEnergyHandler) world.getTileEntity(offsetPos)).receiveEnergy(offset.getOpposite(),1,true)==1) {
+                if (!(world.getBlockState(offsetPos).getBlock() == EnergyMod.conduitEnergy) && world.getTileEntity(offsetPos) != null & world.getTileEntity(offsetPos) instanceof IEnergyHandler && !(previousResults.contains(world.getTileEntity(offsetPos)))&&((IEnergyHandler) world.getTileEntity(offsetPos)).receiveEnergy(offset.getOpposite(),1,true)==1) {
                     previousResults.add(new TransferObject(offset.getOpposite(), (IEnergyReceiver) world.getTileEntity(offsetPos)));
                 }
 
