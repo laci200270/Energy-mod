@@ -1,18 +1,29 @@
 package hu.laci200270.energymod.common.tile;
 
+import cofh.api.energy.IEnergyReceiver;
+import hu.laci200270.energymod.common.enums.EnumSideMode;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Created by Laci on 2016. 01. 01..
  */
-public class TileFurnance extends TileEntity implements IInventory,ITickable{
+public class TileFurnance extends TileEntity implements IInventory,ITickable,IEnergyReceiver{
     ItemStack[] inventory=new ItemStack[2];
+
+    int remainingTicks=-1;
+    ItemStack resultAfterBurning=null;
+    int totalBurningTicks=200;
+    private int energyAmount;
 
     public TileFurnance(){
         inventory[0]=null;
@@ -116,7 +127,17 @@ public class TileFurnance extends TileEntity implements IInventory,ITickable{
 
     @Override
     public void update() {
-
+        ItemStack result=FurnaceRecipes.instance().getSmeltingResult(inventory[0]);
+        if(remainingTicks==-1){
+        if(result!=null){
+            if((inventory[1]!=null&&result.getItem().equals(inventory[1].getItem()))||inventory[1]==null){
+               if(result.stackSize+inventory[1].stackSize>result.getMaxStackSize())
+                if(this.energyAmount>=200){
+                    resultAfterBurning=
+                }
+            }
+        }
+        }
     }
 
     @Override
@@ -132,5 +153,48 @@ public class TileFurnance extends TileEntity implements IInventory,ITickable{
     @Override
     public IChatComponent getDisplayName() {
         return null;
+    }
+
+    public boolean isBurning() {
+        return burning;
+    }
+
+    @Override
+    public int receiveEnergy(EnumFacing facing, int maxReceive, boolean simulate) {
+
+
+            int received = 0;
+
+                if (maxReceive + energyAmount < getMaxEnergyStored(EnumFacing.UP)) {
+                    received = maxReceive;
+                } else {
+                    int virtualOverflow = energyAmount + maxReceive;
+                    int variable2 = virtualOverflow - maxReceive; //I had no better idea for variable name :(
+                    received = getMaxEnergyStored(EnumFacing.UP) - variable2;
+                }
+                if (!simulate)
+                    this.energyAmount += received;
+                worldObj.markBlockForUpdate(pos);
+                markDirty();
+
+            return received;
+
+
+
+    }
+
+    @Override
+    public int getEnergyStored(EnumFacing facing) {
+        return energyAmount;
+    }
+
+    @Override
+    public int getMaxEnergyStored(EnumFacing facing) {
+        return 12000;
+    }
+
+    @Override
+    public boolean canConnectEnergy(EnumFacing facing) {
+        return true;
     }
 }
