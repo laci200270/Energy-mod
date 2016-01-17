@@ -34,7 +34,7 @@ public class EnergyConduit extends Block {
 
     public EnergyConduit() {
         super(Material.iron);
-
+        setUnlocalizedName("energyPipe");
 
     }
 
